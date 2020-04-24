@@ -47,7 +47,7 @@ def process_row(row):
         icu=row[12],
         icu_ventilator=row[13]
     ).on_conflict_ignore().execute()
-    
+
 
 if __name__ == '__main__':
     check_data()
