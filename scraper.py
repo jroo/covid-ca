@@ -32,8 +32,9 @@ def process_row(row):
         if row[i] == '':
             row[i] = None
 
-    print ("Processing row")
-    Daily.create(
+    print ("Processing row %s %s" % ('Ontario', row[0]))
+
+    Daily.insert(
         region='Ontario',
         report_date=row[0],
         confirmed_positive=row[4],
@@ -45,8 +46,8 @@ def process_row(row):
         hospitalizations=row[11],
         icu=row[12],
         icu_ventilator=row[13]
-    )
-
+    ).on_conflict_ignore().execute()
+    
 
 if __name__ == '__main__':
     check_data()

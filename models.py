@@ -4,13 +4,13 @@ from playhouse.db_url import connect
 
 db = connect(os.environ['DATABASE_URL'])
 
+
 class BaseModel(Model):
     class Meta:
         database = db
 
 
 class Daily(BaseModel):
-    primary_key = CompositeKey('region', 'report_date')
     region = CharField()
     report_date = DateTimeField()
     confirmed_positive = IntegerField(null=True)
@@ -22,6 +22,9 @@ class Daily(BaseModel):
     hospitalizations = IntegerField(null=True)
     icu = IntegerField(null=True)
     icu_ventilator = IntegerField(null=True)
+
+    class Meta:
+        primary_key = CompositeKey('region', 'report_date')
 
 
 db.create_tables([Daily])
