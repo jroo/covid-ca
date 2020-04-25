@@ -1,3 +1,4 @@
+# covid-ca
 covid-ca is an application that pulls COVID-19 data together from the provinces and territories of Canada for storage in a database and exposure via JSON and visualizations. 
 
 Currently the application grabs, stores and exposes a JSON representation of daily COVID-19 summary data from the province of Ontario
