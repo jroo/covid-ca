@@ -1,4 +1,5 @@
 venv
+venv-covid-ca/
 .env
 temp
 __pycache__/
