@@ -11,6 +11,7 @@ def average_daily_change_cases(q):
         x += change_previous
     return (x / 7) * 100
 
+
 def average_daily_change_deaths(q):
     # calculate average rate of change from day to day for past seven days
     x = 0
@@ -24,6 +25,7 @@ def average_daily_change_deaths(q):
 def ontario():
     # get daily numbers
     q = Daily.select().order_by(Daily.report_date.desc()).limit(8)
+    pq = PT.get(name='Ontario')
 
     d = {}
     d['report_date'] = q[0].report_date
@@ -37,5 +39,11 @@ def ontario():
     d['death_change_previous'] = round(d['new_deaths'] / q[0].deaths * 100, 2)
     d['yesterday_deaths'] = q[1].deaths
     d['death_change_seven'] = round(average_daily_change_deaths(q), 2)
+    d['in_hospital'] = q[0].hospitalizations
+    d['in_icu'] = q[0].icu
+    d['on_ventilator'] = q[0].icu_ventilator
+    d['hospital_beds'] = pq.hospital_beds
+    d['icu_beds'] = pq.icu_beds
+    d['ventilators'] = pq.ventilators
 
     return render_template("ontario.html", d=d)

@@ -13,7 +13,7 @@
 	{{ d.death_change_previous }}% over the previous total of {{ d.yesterday_deaths }}. The average daily increase of deaths for the past seven days is {{ d.death_change_seven }}%.</div>
 
 	<h4>Hospital Capacity</h4>
-	<div>There are [HOSPITAL] people in hospitals in Ontario due to COVID-19. Of these, [ICU] are in the ICU and [Ventilator] are on ventilators. Ontario currently has [ACUTE_AVAILABLE] a total of acute care beds and [CRITICAL_AVAILABLE] critical care beds with [VENTILATOR_AVAILABLE] of those equipped with ventilators.</div>
+	<div>There are {{ d.in_hospital }} people in hospitals in Ontario due to COVID-19. Of these, {{ d.in_icu }} are in the ICU and {{ d.on_ventilator }} are on ventilators. Ontario currently has {{ d.hospital_beds }} acute care beds and {{ d.icu_beds }} critical care beds with {{ d.ventilators }} of those equipped with ventilators.</div>
 
 <!--
 	<h4>Testing</h4>
@@ -21,4 +21,8 @@
 -->
 
 	<h4>Sources</h4>
+	<ul>
+		<li><a href="https://news.ontario.ca/opo/en/2020/04/ontario-significantly-expands-hospital-capacity-to-prepare-for-any-covid-19-outbreak-scenario.html">Ontario Significantly Expands Hospital Capacity to Prepare for Any COVID-19 Outbreak Scenario</a></li>
+		<li><a href="https://www.ontario.ca/page/2019-novel-coronavirus#section-0">Status of cases in Ontario</a></li>
+	</ul>
 {% endblock %}
