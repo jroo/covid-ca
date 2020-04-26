@@ -7,7 +7,7 @@ def average_daily_change_cases(q):
     x = 0
     for i in range(0, 7):
         new_cases = q[i].total_cases - q[i + 1].total_cases
-        change_previous = new_cases / q[i].total_cases
+        change_previous = new_cases / q[i + 1].total_cases
         x += change_previous
     return (x / 7) * 100
 
@@ -17,7 +17,7 @@ def average_daily_change_deaths(q):
     x = 0
     for i in range(0, 7):
         new_deaths = q[i].deaths - q[i + 1].deaths
-        change_previous = new_deaths / q[i].deaths
+        change_previous = new_deaths / q[i + 1].deaths
         x += change_previous
     return (x / 7) * 100
 
@@ -32,11 +32,11 @@ def ontario():
     d['new_cases'] = q[0].total_cases - q[1].total_cases
     d['total_cases'] = q[0].total_cases
     d['yesterday_total'] = q[1].total_cases
-    d['change_previous'] = round(d['new_cases'] / q[0].total_cases * 100, 2)
+    d['change_previous'] = round(d['new_cases'] / q[1].total_cases * 100, 2)
     d['change_seven'] = round(average_daily_change_cases(q), 2)
     d['new_deaths'] = q[0].deaths - q[1].deaths
     d['total_deaths'] = q[0].deaths
-    d['death_change_previous'] = round(d['new_deaths'] / q[0].deaths * 100, 2)
+    d['death_change_previous'] = round(d['new_deaths'] / q[1].deaths * 100, 2)
     d['yesterday_deaths'] = q[1].deaths
     d['death_change_seven'] = round(average_daily_change_deaths(q), 2)
     d['in_hospital'] = q[0].hospitalizations
