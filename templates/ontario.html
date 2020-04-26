@@ -4,9 +4,11 @@
 
 {% block content %}
 	<h2>Ontario COVID-19 Status</h2>
+
+	<h3>{{ d.report_date.strftime('%B %d, %Y') }}</h3>
 	
 	<h4>Cases</h4>
-	<div>On {{ d.report_date }}, Ontario reported {{ d.new_cases }} new confirmed cases of COVID-19, bringing Ontario's total to {{ d.total_cases }}. This is a {{ d.change_previous }}% increase from the previous day's total of {{ d.yesterday_total }}. The average daily increase over the past seven days is {{ d.change_seven }}%.</div>
+	<div>Ontario reported {{ d.new_cases }} new confirmed cases of COVID-19, bringing Ontario's total to {{ d.total_cases }}. This is a {{ d.change_previous }}% increase from the previous day's total of {{ d.yesterday_total }}. The average daily increase over the past seven days is {{ d.change_seven }}%.</div>
 
 	<h4>Deaths</h4>
 	<div>{{ d.new_deaths }} more people were reported to have died, bringing the total to {{ d.total_deaths }} COVID-19 deaths in Ontario. This is an increase of 
