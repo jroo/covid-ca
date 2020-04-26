@@ -1,3 +1,4 @@
+import json
 import os
 from peewee import *
 from playhouse.db_url import connect
@@ -8,6 +9,14 @@ db = connect(os.environ['DATABASE_URL'])
 class BaseModel(Model):
     class Meta:
         database = db
+
+
+class PT(BaseModel):
+    name = CharField(primary_key=True)
+    url = CharField()
+    hospital_beds = IntegerField()
+    icu_beds = IntegerField()
+    ventilators = IntegerField()
 
 
 class Daily(BaseModel):
@@ -46,4 +55,20 @@ class Cases(BaseModel):
         primary_key = CompositeKey('province_territory', 'source_id')
 
 
-db.create_tables([Daily, Cases])
+# initialize db
+db.create_tables([PT, Daily, Cases])
+
+
+# populate provinces and territories
+script_path = os.path.dirname(__file__)
+relative_path = 'data/provinces_territories.json'
+with open(os.path.join(script_path, relative_path)) as f:
+    data = json.load(f)
+    for pt in data:
+        PT.insert(
+            name=pt['name'],
+            url=pt['url'],
+            hospital_beds=pt['hospital_beds'],
+            icu_beds=pt['icu_beds'],
+            ventilators=pt['ventilators']
+        ).on_conflict_ignore().execute()

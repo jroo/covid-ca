@@ -1,0 +1,9 @@
+[
+	{
+		"name": "Ontario",
+		"url": "https://www.ontario.ca/page/2019-novel-coronavirus#section-0",
+		"hospital_beds": 20354,
+		"icu_beds": 3504,
+		"ventilators": 2811
+	}
+]
