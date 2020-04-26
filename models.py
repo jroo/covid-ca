@@ -17,6 +17,7 @@ class PT(BaseModel):
     hospital_beds = IntegerField()
     icu_beds = IntegerField()
     ventilators = IntegerField()
+    population = IntegerField()
 
 
 class Daily(BaseModel):
@@ -68,6 +69,7 @@ with open(os.path.join(script_path, relative_path)) as f:
         PT.insert(
             name=pt['name'],
             url=pt['url'],
+            population=pt['population'],
             hospital_beds=pt['hospital_beds'],
             icu_beds=pt['icu_beds'],
             ventilators=pt['ventilators']
