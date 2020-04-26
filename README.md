@@ -28,4 +28,4 @@ Currently the application grabs, stores and exposes a JSON representation of dai
 		- ```foreman run scraper.py```
 	- Run web server
 		- ```foreman start```
-	- View `http://localhost:5000/ontario.json` in browser to test. You should see a JSON representation of daily updates from Ontario
+	- View `http://localhost:5000/ontario/daily.json` in browser to test. You should see a JSON representation of daily updates from Ontario
