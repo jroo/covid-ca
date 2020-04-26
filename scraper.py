@@ -13,7 +13,6 @@ print ('Checking for changes to %s' % os.environ['ONTARIO_STATUS_URL'])
 # check for update every 30 minutes
 def check_data():
     print ("Checking %s" % time.ctime())
-    threading.Timer(1800, check_data).start()
     with requests.Session() as s:
         download = s.get(os.environ['ONTARIO_STATUS_URL'])
         decoded = download.content.decode('utf-8')
