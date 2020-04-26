@@ -32,11 +32,11 @@ def ontario():
     d['new_cases'] = q[0].total_cases - q[1].total_cases
     d['total_cases'] = q[0].total_cases
     d['yesterday_total'] = q[1].total_cases
-    d['change_previous'] = round(d['new_cases'] / q[1].total_cases * 100, 2)
+    d['change_previous'] = round(d['new_cases'] / q[1].total_cases * 100, 1)
     d['change_seven'] = round(average_daily_change_cases(q), 2)
     d['new_deaths'] = q[0].deaths - q[1].deaths
     d['total_deaths'] = q[0].deaths
-    d['death_change_previous'] = round(d['new_deaths'] / q[1].deaths * 100, 2)
+    d['death_change_previous'] = round(d['new_deaths'] / q[1].deaths * 100, 1)
     d['yesterday_deaths'] = q[1].deaths
     d['death_change_seven'] = round(average_daily_change_deaths(q), 2)
     d['in_hospital'] = q[0].hospitalizations
@@ -45,5 +45,9 @@ def ontario():
     d['hospital_beds'] = pq.hospital_beds
     d['icu_beds'] = pq.icu_beds
     d['ventilators'] = pq.ventilators
+    d['daily_tests'] = q[0].tests_past_day
+    d['total_tests'] = q[0].total_tests
+    d['tests_per_100k'] = round(
+        d['daily_tests'] / (pq.population / 100000), 1)
 
     return render_template("ontario.html", d=d)

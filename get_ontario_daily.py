@@ -40,6 +40,7 @@ def process_row(row):
         resolved=row[5],
         deaths=row[6],
         total_cases=row[7],
+        total_tests=row[8],
         tests_past_day=row[9],
         under_investigation=row[10],
         hospitalizations=row[11],

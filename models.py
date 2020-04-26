@@ -28,6 +28,7 @@ class Daily(BaseModel):
     deaths = IntegerField(null=True)
     total_cases = IntegerField(null=True)
     tests_past_day = IntegerField(null=True)
+    total_tests = IntegerField(null=True)
     under_investigation = IntegerField(null=True)
     hospitalizations = IntegerField(null=True)
     icu = IntegerField(null=True)
