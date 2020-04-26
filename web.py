@@ -1,4 +1,4 @@
-from flask import jsonify, Flask, Response
+from flask import jsonify, Flask
 from models import *
 from playhouse.shortcuts import model_to_dict
 
@@ -8,12 +8,23 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return ''
 
 
-@app.route('/ontario.json')
-def ontario():
+@app.route('/ontario/daily.json')
+def ontario_daily():
     query = Daily.select().where(Daily.region == "Ontario")
+
+    s = []
+    for row in query:
+        s.append(model_to_dict(row))
+
+    return jsonify(s)
+
+
+@app.route('/ontario/cases.json')
+def ontario_cases():
+    query = Cases.select().where(Cases.province_territory == "Ontario")
 
     s = []
     for row in query:

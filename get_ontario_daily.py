@@ -10,7 +10,7 @@ print ('Ontario Daily')
 print ('Checking for changes to %s' % os.environ['ONTARIO_STATUS_URL'])
 
 
-# check for update every 30 minutes
+# check for update
 def check_data():
     print ("Checking %s" % time.ctime())
     with requests.Session() as s:
