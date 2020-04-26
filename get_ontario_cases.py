@@ -6,15 +6,15 @@ import requests
 import threading
 import time
 
-print ('Hello Ontario')
+print ('Ontario Cases')
 print ('Checking for changes to %s' % os.environ['ONTARIO_STATUS_URL'])
 
 
-# check for update every 30 minutes
+# check for update
 def check_data():
     print ("Checking %s" % time.ctime())
     with requests.Session() as s:
-        download = s.get(os.environ['ONTARIO_STATUS_URL'])
+        download = s.get(os.environ['ONTARIO_CONFIRMED_POSITIVE_URL'])
         decoded = download.content.decode('utf-8')
         cr = csv.reader(decoded.splitlines(), delimiter=',')
         cr_list = list(cr)
@@ -33,18 +33,20 @@ def process_row(row):
 
     print ("Processing row %s %s" % ('Ontario', row[0]))
 
-    Daily.insert(
-        region='Ontario',
-        report_date=row[0],
-        confirmed_positive=row[4],
-        resolved=row[5],
-        deaths=row[6],
-        total_cases=row[7],
-        tests_past_day=row[9],
-        under_investigation=row[10],
-        hospitalizations=row[11],
-        icu=row[12],
-        icu_ventilator=row[13]
+    Cases.insert(
+        province_territory='Ontario',
+        source_id=row[0],
+        episode_date=row[1],
+        age_group=row[2],
+        gender=row[3],
+        how_contracted=row[4],
+        outcome=row[5],
+        health_unit=row[6],
+        health_unit_address=row[7],
+        health_unit_city=row[8],
+        health_unit_postal_code=row[9],
+        health_unit_latitude=row[11],
+        health_unit_longitude=row[12]
     ).on_conflict_ignore().execute()
 
 

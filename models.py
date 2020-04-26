@@ -27,4 +27,23 @@ class Daily(BaseModel):
         primary_key = CompositeKey('region', 'report_date')
 
 
-db.create_tables([Daily])
+class Cases(BaseModel):
+    province_territory = CharField()
+    source_id = IntegerField()
+    episode_date = DateTimeField(null=True)
+    age_group = CharField(null=True)
+    gender = CharField(null=True)
+    how_contracted = CharField(null=True)
+    outcome = CharField(null=True)
+    health_unit = CharField(null=True)
+    health_unit_address = CharField(null=True)
+    health_unit_city = CharField(null=True)
+    health_unit_postal_code = CharField(null=True)
+    health_unit_latitude = CharField(null=True)
+    health_unit_longitude = CharField(null=True)
+
+    class Meta:
+        primary_key = CompositeKey('province_territory', 'source_id')
+
+
+db.create_tables([Daily, Cases])
