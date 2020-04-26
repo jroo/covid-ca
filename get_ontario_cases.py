@@ -3,7 +3,6 @@ from models import *
 import csv
 import os
 import requests
-import threading
 import time
 
 print ('Ontario Cases')
