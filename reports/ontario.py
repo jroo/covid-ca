@@ -31,7 +31,7 @@ def ontario():
     d['report_date'] = q[0].report_date
     new_cases = q[0].total_cases - q[1].total_cases
     d['new_cases'] = f'{new_cases:,}'
-    d['total_cases'] = q[0].total_cases
+    d['total_cases'] = f'{q[0].total_cases:,}'
     d['yesterday_total'] = f'{q[1].total_cases:,}'
     d['change_previous'] = round(new_cases / q[1].total_cases * 100, 1)
     d['change_seven'] = round(average_daily_change_cases(q), 2)
