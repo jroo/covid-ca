@@ -8,17 +8,17 @@
 	<h3>{{ d.report_date.strftime('%B %d, %Y') }}</h3>
 	
 	<h4>Cases</h4>
-	<div>Ontario reported {{ d.new_cases }} new confirmed cases of COVID-19, bringing Ontario's total to {{ d.total_cases }}. This is a {{ d.change_previous }}% increase from the previous day's total of {{ d.yesterday_total }}. The average daily increase over the past seven days is {{ d.change_seven }}%.</div>
+	<div>Ontario reported <strong>{{ d.new_cases }} new confirmed cases</strong> of COVID-19, bringing Ontario's total to {{ d.total_cases }}. This is a <strong>{{ d.change_previous }}% increase</strong> from the previous day's total of {{ d.yesterday_total }}. The average daily increase over the past seven days is {{ d.change_seven }}%.</div>
 
 	<h4>Deaths</h4>
-	<div>{{ d.new_deaths }} more people were reported to have died, bringing the total to {{ d.total_deaths }} COVID-19 deaths in Ontario. This is an increase of 
-	{{ d.death_change_previous }}% over the previous total of {{ d.yesterday_deaths }}. The average daily increase of deaths for the past seven days is {{ d.death_change_seven }}%.</div>
+	<div><strong>{{ d.new_deaths }} more deaths</strong> were reported, bringing the <strong>total to {{ d.total_deaths }} COVID-19 deaths in Ontario</strong>. This is an <strong>increase of 
+	{{ d.death_change_previous }}%</strong> over the previous total of {{ d.yesterday_deaths }}. The average daily increase of deaths for the past seven days is {{ d.death_change_seven }}%.</div>
 
 	<h4>Hospital Capacity</h4>
-	<div>There are {{ d.in_hospital }} people in hospitals in Ontario due to COVID-19. Of these, {{ d.in_icu }} are in the ICU and {{ d.on_ventilator }} are on ventilators. Ontario currently has {{ d.hospital_beds }} acute care beds and {{ d.icu_beds }} critical care beds with {{ d.ventilators }} of those equipped with ventilators.</div>
+	<div>There are <strong>{{ d.in_hospital }} people in hospitals</strong> in Ontario due to COVID-19. Of these, <strong>{{ d.in_icu }} are in the ICU</strong> and <strong>{{ d.on_ventilator }} are on ventilators</strong>. Ontario currently has {{ d.hospital_beds }} acute care beds and {{ d.icu_beds }} critical care beds with {{ d.ventilators }} of those equipped with ventilators.</div>
 
 	<h4>Testing</h4>
-	In the previous day, {{ d.daily_tests }} tests were completed. That's {{ d.daily_tests_per_100k }} tests per 100k people in Ontario.  In total, {{ d.total_tests }} tests have been completed. Ontario is aiming to test 14,000 people per day by April 29 and 16,000 people per day by May 6.
+	In the previous day, <strong>{{ d.daily_tests }} tests were completed</strong>. That's <strong>{{ d.daily_tests_per_100k }} tests per 100k people</strong> in Ontario.  In total, {{ d.total_tests }} tests have been completed. Ontario is aiming to test 14,000 people per day by April 29 and 16,000 people per day by May 6.
 	<div></div>
 
 	<h4>Sources</h4>
