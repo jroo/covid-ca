@@ -1,10 +1,119 @@
 [
 	{
+		"name": "Alberta",
+		"nombre": "Alberta",
+		"url": "https://www.alberta.ca/covid-19-alberta-data.aspx",
+		"population": 4413146,
+		"hospital_beds": null,
+		"icu_beds": null,
+		"ventilators": null
+	},
+	{
+		"name": "British Columbia",
+		"nombre": "Colombie-Britannique",
+		"url": "http://www.bccdc.ca/health-info/diseases-conditions/covid-19/data",
+		"population": 5110917,
+		"hospital_beds": null,
+		"icu_beds": null,
+		"ventilators": null
+	},
+	{
+		"name": "Manitoba",
+		"nombre": "Manitoba",
+		"url": "https://www.gov.mb.ca/covid19/updates/index.html",
+		"population": 1377517,
+		"hospital_beds": null,
+		"icu_beds": null,
+		"ventilators": null
+	},
+	{
+		"name": "New Brunswick",
+		"nombre": "Nouveau-Brunswick",
+		"url": "https://www2.gnb.ca/content/gnb/en/corporate/promo/covid-19/maps_graphs.html",
+		"population": 779993,
+		"hospital_beds": null,
+		"icu_beds": null,
+		"ventilators": null
+	},
+	{
+		"name": "Newfoundland and Labrador",
+		"nombre": "Terre-Neuve-et-Labrador",
+		"url": "https://covid-19-newfoundland-and-labrador-gnl.hub.arcgis.com/",
+		"population": 521365,
+		"hospital_beds": null,
+		"icu_beds": null,
+		"ventilators": null
+	},
+	{
+		"name": "Northwest Territories",
+		"nombre": "Territoires du Nord-Ouest",
+		"url": "https://www.hss.gov.nt.ca/en/services/coronavirus-disease-covid-19",
+		"population": 44904,
+		"hospital_beds": null,
+		"icu_beds": null,
+		"ventilators": null
+	},
+	{
+		"name": "Nova Scotia",
+		"nombre": "Nouvelle-Écosse",
+		"url": "https://novascotia.ca/coronavirus/data/",
+		"population": 977457,
+		"hospital_beds": null,
+		"icu_beds": null,
+		"ventilators": null
+	},
+	{
+		"name": "Nunavut",
+		"nombre": "Nunavut",
+		"url": "https://gov.nu.ca/health/information/covid-19-novel-coronavirus",
+		"population": 39097,
+		"hospital_beds": null,
+		"icu_beds": null,
+		"ventilators": null
+	},
+	{
 		"name": "Ontario",
+		"nombre": "Ontario",
 		"url": "https://www.ontario.ca/page/2019-novel-coronavirus#section-0",
 		"population": 14711827,
 		"hospital_beds": 20354,
 		"icu_beds": 3504,
 		"ventilators": 2811
+	},
+	{
+		"name": "Prince Edward Island",
+		"nombre": "Île-du-Prince-Édouard",
+		"url": "https://www.princeedwardisland.ca/en/information/health-and-wellness/pei-covid-19-testing-data",
+		"population": 158158,
+		"hospital_beds": null,
+		"icu_beds": null,
+		"ventilators": null
+	},
+	{
+		"name": "Quebec",
+		"nombre": "Québec",
+		"url": "https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/situation-coronavirus-in-quebec/",
+		"population": 8537674,
+		"hospital_beds": null,
+		"icu_beds": null,
+		"ventilators": null
+	},
+	{
+		"name": "Saskatchewan",
+		"nombre": "Saskatchewan",
+		"url": "https://www.saskatchewan.ca/government/health-care-administration-and-provider-resources/treatment-procedures-and-guidelines/emerging-public-health-issues/2019-novel-coronavirus/cases-and-risk-of-covid-19-in-saskatchewan",
+		"population": 1181666,
+		"hospital_beds": null,
+		"icu_beds": null,
+		"ventilators": null
+	},
+	{
+		"name": "Yukon",
+		"nombre": "Yukon",
+		"url": "https://yukon.ca/covid-19",
+		"population": 41078,
+		"hospital_beds": null,
+		"icu_beds": null,
+		"ventilators": null
 	}
 ]

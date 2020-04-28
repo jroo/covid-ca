@@ -1,19 +1,20 @@
 from models import *
 
 import csv
+import datetime
 import os
 import requests
 import time
 
-print ('Ontario Daily')
-print ('Checking for changes to %s' % os.environ['ONTARIO_STATUS_URL'])
+print ('Canada Daily')
+print ('Checking for changes to %s' % os.environ['BC_DAILY_URL'])
 
 
 # check for update
 def check_data():
     print ("Checking %s" % time.ctime())
     with requests.Session() as s:
-        download = s.get(os.environ['ONTARIO_STATUS_URL'])
+        download = s.get(os.environ['PUBLIC_HEALTH_DAILY_URL'])
         decoded = download.content.decode('utf-8')
         cr = csv.reader(decoded.splitlines(), delimiter=',')
         cr_list = list(cr)
@@ -30,21 +31,24 @@ def process_row(row):
         if row[i] == '':
             row[i] = None
 
-    print ("Processing row %s %s" % ('Ontario', row[0]))
+    print ("Processing row %s %s" % ('Canada', row[0]))
+    print (row)
+
+    timeArr = row[3].split('-')
+    rd = datetime.datetime(int(timeArr[2]), int(timeArr[1]), int(timeArr[0]))
 
     Daily.insert(
-        region='Ontario',
-        report_date=row[0],
-        confirmed_positive=row[4],
-        resolved=row[5],
+        region=row[1],
+        report_date=rd,
+        confirmed_positive=None,
         deaths=row[6],
         total_cases=row[7],
         total_tests=row[8],
-        tests_past_day=row[9],
-        under_investigation=row[10],
-        hospitalizations=row[11],
+        tests_past_day=None,
+        under_investigation=None,
+        hospitalizations=None,
         icu=row[12],
-        icu_ventilator=row[13]
+        icu_ventilator=None
     ).on_conflict_ignore().execute()
 
 

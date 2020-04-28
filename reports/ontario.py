@@ -24,7 +24,8 @@ def average_daily_change_deaths(q):
 
 def ontario():
     # get daily numbers
-    q = Daily.select().order_by(Daily.report_date.desc()).limit(8)
+    q = Daily.select().where(Daily.region=='Ontario').order_by(
+        Daily.report_date.desc()).limit(8)
     pq = PT.get(name='Ontario')
 
     d = {}

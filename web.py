@@ -1,8 +1,9 @@
-from flask import jsonify, Flask
+from flask import jsonify, Flask, render_template
 from models import *
 from reports.ontario import ontario
 from playhouse.shortcuts import model_to_dict
 
+import os
 
 app = Flask(__name__)
 
@@ -37,3 +38,8 @@ def ontario_cases():
         s.append(model_to_dict(row))
 
     return jsonify(s)
+
+
+@app.route('/sources.html')
+def sources():
+    return render_template('sources.html', d=None)

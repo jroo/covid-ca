@@ -13,11 +13,12 @@ class BaseModel(Model):
 
 class PT(BaseModel):
     name = CharField(primary_key=True)
-    url = CharField()
-    hospital_beds = IntegerField()
-    icu_beds = IntegerField()
-    ventilators = IntegerField()
+    nombre = CharField()
+    url = CharField(null=True)
     population = IntegerField()
+    hospital_beds = IntegerField(null=True)
+    icu_beds = IntegerField(null=True)
+    ventilators = IntegerField(null=True)
 
 
 class Daily(BaseModel):
@@ -69,6 +70,7 @@ with open(os.path.join(script_path, relative_path)) as f:
     for pt in data:
         PT.insert(
             name=pt['name'],
+            nombre=pt['nombre'],
             url=pt['url'],
             population=pt['population'],
             hospital_beds=pt['hospital_beds'],
