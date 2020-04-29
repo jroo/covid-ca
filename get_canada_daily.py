@@ -12,7 +12,7 @@ print ('Checking for changes to %s' % os.environ['PUBLIC_HEALTH_DAILY_URL'])
 
 # check for update
 def check_data():
-    print ("Checking %s" % time.ctime())
+    print ("Checking for updates: %s" % time.ctime())
     with requests.Session() as s:
         download = s.get(os.environ['PUBLIC_HEALTH_DAILY_URL'])
         decoded = download.content.decode('utf-8')
@@ -27,6 +27,7 @@ def check_data():
 # for each day in a provinces data set,
 # calculate and save number of new tests
 def calc_daily_tests():
+    print ('Calculating daily tests: %s' % time.ctime())
     pts = PT.select().order_by(PT.name)
     for pt in pts:
         pt_summaries = Daily.select().where(Daily.region == pt.name).order_by(
@@ -45,7 +46,6 @@ def calc_daily_tests():
 
 
 def process_row(row):
-    print ("Processing row %s %s" % ('Canada', row))
     row[9] = row[9].replace('N/A', '').strip()
 
     # convert blanks to null
