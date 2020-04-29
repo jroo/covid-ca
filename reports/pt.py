@@ -24,9 +24,10 @@ def average_daily_change_deaths(q):
 
 def pt(pt_name):
     # get daily numbers
-    q = Daily.select().where(Daily.region == pt_name).order_by(
+    pt_name = pt_name.lower()
+    q = Daily.select().where(fn.Lower(Daily.region) == pt_name).order_by(
         Daily.report_date.desc()).limit(8)
-    pq = PT.get(name=pt_name)
+    pq = PT.get(fn.Lower(PT.name)==pt_name)
 
     d = {}
 
