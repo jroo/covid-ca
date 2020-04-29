@@ -60,8 +60,7 @@ def pt(pt_name):
     d['daily_tests_per_100k'] = round(
         d['daily_tests'] / (pq.population / 100000), 1)
 
-    d['display_tests'] = False
-    d['display_hospital'] = False
+    # display section flags
     d['display_cases'] = (d['new_cases'] and d['total_cases'] and d['yesterday_total'] and d['change_previous'] and d['change_seven'])
     d['display_deaths'] = (d['new_deaths'] and d['total_deaths'] and d['death_change_previous'] and d['yesterday_deaths'] and d['death_change_seven'])
     d['display_hospital'] = (d['in_hospital'] and d['in_icu'])

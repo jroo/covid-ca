@@ -13,14 +13,9 @@ def hello_world():
     return ''
 
 
-@app.route('/ontario/')
-def ontario_report():
-    return pt('Ontario')
-
-
-@app.route('/bc')
-def bc_report():
-    return pt('British Columbia')
+@app.route('/<pt_name>/')
+def pt_report(pt_name):
+    return pt(pt_name)
 
 
 @app.route('/ontario/daily.json')

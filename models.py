@@ -14,6 +14,7 @@ class BaseModel(Model):
 class PT(BaseModel):
     name = CharField(primary_key=True)
     nombre = CharField()
+    abbreviation = CharField()
     url = CharField(null=True)
     population = IntegerField()
     hospital_beds = IntegerField(null=True)
@@ -72,6 +73,7 @@ with open(os.path.join(script_path, relative_path)) as f:
         PT.insert(
             name=pt['name'],
             nombre=pt['nombre'],
+            abbreviation=pt['abbreviation'],
             url=pt['url'],
             population=pt['population'],
             hospital_beds=pt['hospital_beds'],
