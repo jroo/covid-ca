@@ -24,7 +24,32 @@ def check_data():
                 process_row(cr_list[i])
 
 
+# for each day in a provinces data set,
+# calculate and save number of new tests
+def calc_daily_tests():
+    pts = PT.select().order_by(PT.name)
+    for pt in pts:
+        pt_summaries = Daily.select().where(Daily.region == pt.name).order_by(
+            Daily.report_date)
+        for i in range(len(pt_summaries)):
+            if (i > 0):
+                if (not pt_summaries[i].tests_past_day):
+                    if (pt_summaries[i].total_tests and pt_summaries[i - 1].total_tests):
+                        tpd = int(pt_summaries[i].total_tests) - \
+                            int(pt_summaries[i - 1].total_tests)
+                        Daily.update(tests_past_day=tpd).where(
+                            Daily.region == pt_summaries[i].region, Daily.report_date == pt_summaries[i].report_date).execute()
+                        print ('%s: %s: %s: int(%s) - int(%s)' %
+                               (pt_summaries[i].region,
+                                pt_summaries[i].report_date,
+                                pt_summaries[i].tests_past_day,
+                                pt_summaries[i].total_tests,
+                                pt_summaries[i - 1].total_tests
+                                ))
+
 # process (clean and add) a row of data
+
+
 def process_row(row):
     print ("Processing row %s %s" % ('Canada', row))
     row[9] = row[9].replace('N/A', '').strip()
@@ -46,6 +71,7 @@ def process_row(row):
         total_tests=row[8],
         resolved=row[9],
         tests_past_day=None,
+        cases_past_day=row[12],
         under_investigation=None,
         hospitalizations=None,
         icu=None,
@@ -55,3 +81,4 @@ def process_row(row):
 
 if __name__ == '__main__':
     check_data()
+    calc_daily_tests()
