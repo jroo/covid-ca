@@ -68,4 +68,4 @@ def pt(pt_name):
     d['display_testing'] = (d['daily_tests'] and d['total_tests'] and d['daily_tests_per_100k'])
     d['display_testing_goals'] = (pt_name == 'Ontario')
 
-    return render_template("ontario.html", d=d)
+    return render_template("pt.html", d=d)

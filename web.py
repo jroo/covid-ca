@@ -1,6 +1,6 @@
 from flask import jsonify, Flask, render_template
 from models import *
-from reports.ontario import pt
+from reports.pt import pt
 from playhouse.shortcuts import model_to_dict
 
 import os
