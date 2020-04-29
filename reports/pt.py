@@ -7,7 +7,7 @@ def average_daily_change_cases(q):
     x = 0
     for i in range(0, 7):
         new_cases = q[i].total_cases - q[i + 1].total_cases
-        change_previous = new_cases / q[i + 1].total_cases
+        change_previous = weird_division(new_cases, q[i + 1].total_cases)
         x += change_previous
     return (x / 7) * 100
 
@@ -17,33 +17,37 @@ def average_daily_change_deaths(q):
     x = 0
     for i in range(0, 7):
         new_deaths = q[i].deaths - q[i + 1].deaths
-        change_previous = new_deaths / q[i + 1].deaths
+        change_previous = weird_division(new_deaths, q[i + 1].deaths)
         x += change_previous
     return (x / 7) * 100
 
 
+# return zero if dividing by zero
+def weird_division(n, d):
+    return n / d if d else 0
+
+
 def pt(pt_name):
     # get daily numbers
-    pt_name = pt_name.lower()
-    q = Daily.select().where(fn.Lower(Daily.region) == pt_name).order_by(
+    q = Daily.select().where(fn.Lower(Daily.region) == pt_name.lower()).order_by(
         Daily.report_date.desc()).limit(8)
-    pq = PT.get(fn.Lower(PT.name)==pt_name)
+    pq = PT.get(fn.Lower(PT.name)==pt_name.lower())
 
     d = {}
 
     #  info
-    d['region'] = pt_name
+    d['region'] = q[0].region
     d['report_date'] = q[0].report_date
     d['new_cases'] = q[0].total_cases - q[1].total_cases
     d['total_cases'] = q[0].total_cases
     d['yesterday_total'] = q[1].total_cases
-    d['change_previous'] = round(d['new_cases'] / q[1].total_cases * 100, 1)
+    d['change_previous'] = round(weird_division(d['new_cases'], q[1].total_cases) * 100, 1)
     d['change_seven'] = round(average_daily_change_cases(q), 2)
 
     # death info
     d['new_deaths'] = q[0].deaths - q[1].deaths
     d['total_deaths'] = q[0].deaths
-    d['death_change_previous'] = round(d['new_deaths'] / q[1].deaths * 100, 1)
+    d['death_change_previous'] = round(weird_division(d['new_deaths'], q[1].deaths) * 100, 1)
     d['yesterday_deaths'] = q[1].deaths
     d['death_change_seven'] = round(average_daily_change_deaths(q), 2)
 
