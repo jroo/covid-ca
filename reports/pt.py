@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import abort, render_template
 from models import *
 
 
@@ -29,7 +29,7 @@ def weird_division(n, d):
 # package up data for template
 
 
-def package_up(q, pq):
+def package_up(pt_name, q, pq):
     d = {}
 
     if (q and pq):
@@ -88,10 +88,15 @@ def package_up(q, pq):
 
 def pt(pt_name):
     # get daily numbers
-    q = Daily.select().where(
-        fn.Lower(Daily.region) == pt_name.lower()).order_by(
-        Daily.report_date.desc()).limit(8)
-    pq = PT.get(fn.Lower(PT.name) == pt_name.lower())
-    d = package_up(q, pq)
+
+    try:
+        q = Daily.select().where(
+            fn.Lower(Daily.region) == pt_name.lower()).order_by(
+            Daily.report_date.desc()).limit(8)
+        pq = PT.get(fn.Lower(PT.name) == pt_name.lower())
+    except DoesNotExist:
+        abort(404)
+
+    d = package_up(pt_name, q, pq)
 
     return render_template("pt.html", d=d)
