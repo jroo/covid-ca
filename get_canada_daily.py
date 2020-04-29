@@ -19,20 +19,20 @@ def check_data():
         cr = csv.reader(decoded.splitlines(), delimiter=',')
         cr_list = list(cr)
         for i in range(len(cr_list)):
+            # process all but header row
             if (i > 0):
                 process_row(cr_list[i])
 
 
-# process (add or update) a row of data
+# process (clean and add) a row of data
 def process_row(row):
+    print ("Processing row %s %s" % ('Canada', row))
+    row[9] = row[9].replace('N/A', '').strip()
 
     # convert blanks to null
     for i in range(len(row)):
         if row[i] == '':
             row[i] = None
-
-    print ("Processing row %s %s" % ('Canada', row[0]))
-    print (row)
 
     timeArr = row[3].split('-')
     rd = datetime.datetime(int(timeArr[2]), int(timeArr[1]), int(timeArr[0]))
@@ -44,10 +44,11 @@ def process_row(row):
         deaths=row[6],
         total_cases=row[7],
         total_tests=row[8],
+        resolved=row[9],
         tests_past_day=None,
         under_investigation=None,
         hospitalizations=None,
-        icu=row[12],
+        icu=None,
         icu_ventilator=None
     ).on_conflict_ignore().execute()
 
