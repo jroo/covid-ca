@@ -1,24 +1,30 @@
 {% extends 'base.html' %}
 
-{% block title %}Ontario COVID-19 Status{% endblock %}
+{% block title %}{{ d.region }} COVID-19 Status{% endblock %}
 
 {% block content %}
-	<h2>Ontario COVID-19 Status</h2>
+	<h2>{{ d.region }} COVID-19 Status</h2>
 
 	<h3>{{ d.report_date.strftime('%B %d, %Y') }}</h3>
 	
+	{% if d.display_cases %}
 	<h4>Cases</h4>
-	<div>Ontario reported <strong>{{ d.new_cases }} new confirmed cases</strong> of COVID-19, bringing Ontario's total to {{ d.total_cases }}. This is a <strong>{{ d.change_previous }}% increase</strong> from the previous day's total of {{ d.yesterday_total }}. The average daily increase over the past seven days is {{ d.change_seven }}%.</div>
+	<div>{{ d.region }} reported <strong>{{ "{:,}".format(d.new_cases) }} new confirmed cases</strong> of COVID-19, bringing {{ d.region }}'s total to {{ "{:,}".format(d.total_cases) }}. This is a <strong>{{ d.change_previous }}% increase</strong> from the previous day's total of {{ "{:,}".format(d.yesterday_total) }}. The average daily increase over the past seven days is {{ d.change_seven }}%.</div>
+	{% endif %}
 
 	<h4>Deaths</h4>
-	<div><strong>{{ d.new_deaths }} more deaths</strong> were reported, bringing the <strong>total to {{ d.total_deaths }} COVID-19 deaths in Ontario</strong>. This is an <strong>increase of 
-	{{ d.death_change_previous }}%</strong> over the previous total of {{ d.yesterday_deaths }}. The average daily increase of deaths for the past seven days is {{ d.death_change_seven }}%.</div>
+	<div><strong>{{ d.new_deaths }} more deaths</strong> were reported, bringing the <strong>total to {{ "{:,}".format(d.total_deaths) }} COVID-19 deaths in {{ d.region }}</strong>. This is an <strong>increase of 
+	{{ d.death_change_previous }}%</strong> over the previous total of {{ "{:,}".format(d.yesterday_deaths) }}. The average daily increase of deaths for the past seven days is {{ d.death_change_seven }}%.</div>
 
+	{% if d.display_hospital %}
 	<h4>Hospital Capacity</h4>
-	<div>There are <strong>{{ d.in_hospital }} people in hospitals</strong> in Ontario due to COVID-19. Of these, <strong>{{ d.in_icu }} are in the ICU</strong> and <strong>{{ d.on_ventilator }} are on ventilators</strong>. Ontario currently has {{ d.hospital_beds }} acute care beds and {{ d.icu_beds }} critical care beds with {{ d.ventilators }} of those equipped with ventilators.</div>
+	<div>There are <strong>{{ "{:,}".format(d.in_hospital) }} people in hospitals</strong> in {{ d.region }} due to COVID-19. Of these, <strong>{{ "{:,}".format(d.in_icu) }} are in the ICU</strong> and <strong>{{ "{:,}".format(d.on_ventilator) }} are on ventilators</strong>. {{ d.region }} currently has {{ "{:,}".format(d.hospital_beds) }} acute care beds and {{ "{:,}".format(d.icu_beds) }} critical care beds with {{ "{:,}".format(d.ventilators) }} of those equipped with ventilators.</div>
+	{% endif %}
 
+	{% if d.display_testing %}
 	<h4>Testing</h4>
-	In the previous day, <strong>{{ d.daily_tests }} tests were completed</strong>. That's <strong>{{ d.daily_tests_per_100k }} tests per 100k people</strong> in Ontario.  In total, {{ d.total_tests }} tests have been completed. Ontario is aiming to test 14,000 people per day by April 29 and 16,000 people per day by May 6.
+	In the previous day, <strong>{{ "{:,}".format(d.daily_tests) }} tests were completed</strong>. That's <strong>{{ "{:,}".format(d.daily_tests_per_100k) }} tests per 100k people</strong> in {{ d.region }}. In total, {{ "{:,}".format(d.total_tests) }} tests have been completed.{% if d.display_testing_goals %}Ontario is aiming to test 14,000 people per day by April 29 and 16,000 people per day by May 6.{% endif %}
+	{% endif %}
 	<div></div>
 
 	<h4>Sources</h4>

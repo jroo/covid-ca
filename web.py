@@ -1,6 +1,6 @@
 from flask import jsonify, Flask, render_template
 from models import *
-from reports.ontario import ontario
+from reports.ontario import pt
 from playhouse.shortcuts import model_to_dict
 
 import os
@@ -15,7 +15,12 @@ def hello_world():
 
 @app.route('/ontario/')
 def ontario_report():
-    return ontario()
+    return pt('Ontario')
+
+
+@app.route('/bc')
+def bc_report():
+    return pt('British Columbia')
 
 
 @app.route('/ontario/daily.json')

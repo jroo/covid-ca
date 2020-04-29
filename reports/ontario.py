@@ -22,36 +22,50 @@ def average_daily_change_deaths(q):
     return (x / 7) * 100
 
 
-def ontario():
+def pt(pt_name):
     # get daily numbers
-    q = Daily.select().where(Daily.region=='Ontario').order_by(
+    q = Daily.select().where(Daily.region == pt_name).order_by(
         Daily.report_date.desc()).limit(8)
-    pq = PT.get(name='Ontario')
+    pq = PT.get(name=pt_name)
 
     d = {}
+
+    #  info
+    d['region'] = pt_name
     d['report_date'] = q[0].report_date
-    new_cases = q[0].total_cases - q[1].total_cases
-    d['new_cases'] = f'{new_cases:,}'
-    d['total_cases'] = f'{q[0].total_cases:,}'
-    d['yesterday_total'] = f'{q[1].total_cases:,}'
-    d['change_previous'] = round(new_cases / q[1].total_cases * 100, 1)
+    d['new_cases'] = q[0].total_cases - q[1].total_cases
+    d['total_cases'] = q[0].total_cases
+    d['yesterday_total'] = q[1].total_cases
+    d['change_previous'] = round(d['new_cases'] / q[1].total_cases * 100, 1)
     d['change_seven'] = round(average_daily_change_cases(q), 2)
-    new_deaths = q[0].deaths - q[1].deaths
-    d['new_deaths'] = f'{new_deaths:,}'
-    d['total_deaths'] = f'{q[0].deaths:,}'
-    d['death_change_previous'] = round(new_deaths / q[1].deaths * 100, 1)
-    d['yesterday_deaths'] = f'{q[1].deaths:,}'
+
+    # death info
+    d['new_deaths'] = q[0].deaths - q[1].deaths
+    d['total_deaths'] = q[0].deaths
+    d['death_change_previous'] = round(d['new_deaths'] / q[1].deaths * 100, 1)
+    d['yesterday_deaths'] = q[1].deaths
     d['death_change_seven'] = round(average_daily_change_deaths(q), 2)
+
+    # hospital info
     d['in_hospital'] = q[0].hospitalizations
-    d['in_icu'] = f'{q[0].icu:,}'
-    d['on_ventilator'] = f'{q[0].icu_ventilator:,}'
-    d['hospital_beds'] = f'{pq.hospital_beds:,}'
-    d['icu_beds'] = f'{pq.icu_beds:,}'
-    d['ventilators'] = f'{pq.ventilators:,}'
-    daily_tests = q[0].tests_past_day
-    d['daily_tests'] = f'{daily_tests:,}'
-    d['total_tests'] = f'{q[0].total_tests:,}'
+    d['in_icu'] = q[0].icu
+    d['on_ventilator'] = q[0].icu_ventilator
+    d['hospital_beds'] = pq.hospital_beds
+    d['icu_beds'] = pq.icu_beds
+    d['ventilators'] = pq.ventilators
+
+    # testing info
+    d['daily_tests'] = q[0].tests_past_day
+    d['total_tests'] = q[0].total_tests
     d['daily_tests_per_100k'] = round(
-        daily_tests / (pq.population / 100000), 1)
+        d['daily_tests'] / (pq.population / 100000), 1)
+
+    d['display_tests'] = False
+    d['display_hospital'] = False
+    d['display_cases'] = (d['new_cases'] and d['total_cases'] and d['yesterday_total'] and d['change_previous'] and d['change_seven'])
+    d['display_deaths'] = (d['new_deaths'] and d['total_deaths'] and d['death_change_previous'] and d['yesterday_deaths'] and d['death_change_seven'])
+    d['display_hospital'] = (d['in_hospital'] and d['in_icu'])
+    d['display_testing'] = (d['daily_tests'] and d['total_tests'] and d['daily_tests_per_100k'])
+    d['display_testing_goals'] = (pt_name == 'Ontario')
 
     return render_template("ontario.html", d=d)
