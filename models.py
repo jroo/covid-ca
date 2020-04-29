@@ -13,7 +13,7 @@ class BaseModel(Model):
 
 class PT(BaseModel):
     name = CharField(primary_key=True)
-    nombre = CharField()
+    nom = CharField()
     abbreviation = CharField()
     url = CharField(null=True)
     population = IntegerField()
@@ -72,7 +72,7 @@ with open(os.path.join(script_path, relative_path)) as f:
     for pt in data:
         PT.insert(
             name=pt['name'],
-            nombre=pt['nombre'],
+            nom=pt['nom'],
             abbreviation=pt['abbreviation'],
             url=pt['url'],
             population=pt['population'],
