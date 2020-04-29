@@ -6,9 +6,6 @@ import os
 import requests
 import time
 
-print ('Canada Daily')
-print ('Checking for changes to %s' % os.environ['PUBLIC_HEALTH_DAILY_URL'])
-
 
 # check for update
 def check_data():
@@ -27,7 +24,6 @@ def check_data():
 # for each day in a provinces data set,
 # calculate and save number of new tests
 def calc_daily_tests():
-    print ('Calculating daily tests: %s' % time.ctime())
     pts = PT.select().order_by(PT.name)
     for pt in pts:
         pt_summaries = Daily.select().where(Daily.region == pt.name).order_by(
@@ -74,5 +70,10 @@ def process_row(row):
 
 
 if __name__ == '__main__':
+    print ('\nCanada Daily')
+    print ('-------------')
+    print ('Checking for changes to %s' % os.environ['PUBLIC_HEALTH_DAILY_URL'])
     check_data()
+    print ('Calculating daily tests: %s' % time.ctime())
     calc_daily_tests()
+    print ('Complete\n')

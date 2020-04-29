@@ -5,13 +5,10 @@ import os
 import requests
 import time
 
-print ('Ontario Daily')
-print ('Checking for changes to %s' % os.environ['ONTARIO_STATUS_URL'])
-
 
 # check for update
 def check_data():
-    print ("Checking %s" % time.ctime())
+    print ("Checking for updates: %s" % time.ctime())
     with requests.Session() as s:
         download = s.get(os.environ['ONTARIO_STATUS_URL'])
         decoded = download.content.decode('utf-8')
@@ -30,8 +27,6 @@ def process_row(row):
         if row[i] == '':
             row[i] = None
 
-    print ("Processing row %s %s" % ('Ontario', row[0]))
-
     Daily.insert(
         region='Ontario',
         report_date=row[0],
@@ -49,4 +44,8 @@ def process_row(row):
 
 
 if __name__ == '__main__':
+    print ('\nOntario Daily')
+    print ('-------------')
+    print ('Checking for changes to %s' % os.environ['ONTARIO_STATUS_URL'])
     check_data()
+    print ("Complete\n")
