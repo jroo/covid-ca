@@ -7,7 +7,7 @@ import requests
 import time
 
 print ('Canada Daily')
-print ('Checking for changes to %s' % os.environ['BC_DAILY_URL'])
+print ('Checking for changes to %s' % os.environ['PUBLIC_HEALTH_DAILY_URL'])
 
 
 # check for update
@@ -39,13 +39,7 @@ def calc_daily_tests():
                             int(pt_summaries[i - 1].total_tests)
                         Daily.update(tests_past_day=tpd).where(
                             Daily.region == pt_summaries[i].region, Daily.report_date == pt_summaries[i].report_date).execute()
-                        print ('%s: %s: %s: int(%s) - int(%s)' %
-                               (pt_summaries[i].region,
-                                pt_summaries[i].report_date,
-                                pt_summaries[i].tests_past_day,
-                                pt_summaries[i].total_tests,
-                                pt_summaries[i - 1].total_tests
-                                ))
+
 
 # process (clean and add) a row of data
 
