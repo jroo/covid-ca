@@ -31,9 +31,9 @@ def fill_past_days(region_name):
 
 # go through every region and calculate past day totals
 def fill_all_regions_past_days():
-        # get all regions
-        pts = PT.select().order_by(PT.name)
+    # get all regions
+    pts = PT.select().order_by(PT.name)
 
-        # loop through them and update totals
-        for pt in pts:
-            fill_past_days(pt.name)
+    # loop through them and update totals
+    for pt in pts:
+        fill_past_days(pt.name)

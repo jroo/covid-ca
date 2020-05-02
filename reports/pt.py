@@ -1,5 +1,6 @@
-from flask import abort, render_template
+from flask import abort, jsonify, render_template
 from models import *
+from playhouse.shortcuts import model_to_dict
 
 
 def average_daily_change_cases(q):
@@ -100,3 +101,15 @@ def pt(pt_name):
     d = package_up(pt_name, q, pq)
 
     return render_template("pt.html", d=d)
+
+
+def pt_daily_json(pt_name):
+    query = Daily.select().where(
+        fn.Lower(Daily.region) == pt_name.lower()).order_by(
+        Daily.report_date)
+
+    s = []
+    for row in query:
+        s.append(model_to_dict(row))
+
+    return jsonify(s)

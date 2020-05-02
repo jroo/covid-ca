@@ -54,7 +54,8 @@ def process_row(row):
 if __name__ == '__main__':
     print ('\nCanada Daily')
     print ('-------------')
-    print ('Checking for changes to %s' % os.environ['PUBLIC_HEALTH_DAILY_URL'])
+    print ('Checking for changes to %s' %
+           os.environ['PUBLIC_HEALTH_DAILY_URL'])
     check_data()
     print ('Calculating past day totals')
     fill_all_regions_past_days()
