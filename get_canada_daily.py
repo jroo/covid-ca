@@ -22,26 +22,7 @@ def check_data():
                 process_row(cr_list[i])
 
 
-# for each day in a provinces data set,
-# calculate and save number of new tests
-def calc_daily_tests():
-    pts = PT.select().order_by(PT.name)
-    for pt in pts:
-        pt_summaries = Daily.select().where(Daily.region == pt.name).order_by(
-            Daily.report_date)
-        for i in range(len(pt_summaries)):
-            if (i > 0):
-                if (not pt_summaries[i].tests_past_day):
-                    if (pt_summaries[i].total_tests and pt_summaries[i - 1].total_tests):
-                        tpd = int(pt_summaries[i].total_tests) - \
-                            int(pt_summaries[i - 1].total_tests)
-                        Daily.update(tests_past_day=tpd).where(
-                            Daily.region == pt_summaries[i].region, Daily.report_date == pt_summaries[i].report_date).execute()
-
-
 # process (clean and add) a row of data
-
-
 def process_row(row):
     row[9] = row[9].replace('N/A', '').strip()
 
@@ -75,7 +56,6 @@ if __name__ == '__main__':
     print ('-------------')
     print ('Checking for changes to %s' % os.environ['PUBLIC_HEALTH_DAILY_URL'])
     check_data()
-    print ('Calculating daily tests: %s' % time.ctime())
-    #calc_daily_tests()
+    print ('Calculating past day totals')
     fill_all_regions_past_days()
     print ('Complete\n')
