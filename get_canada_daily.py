@@ -1,4 +1,5 @@
 from models import *
+from import_utils import fill_all_regions_past_days
 
 import csv
 import datetime
@@ -75,5 +76,6 @@ if __name__ == '__main__':
     print ('Checking for changes to %s' % os.environ['PUBLIC_HEALTH_DAILY_URL'])
     check_data()
     print ('Calculating daily tests: %s' % time.ctime())
-    calc_daily_tests()
+    #calc_daily_tests()
+    fill_all_regions_past_days()
     print ('Complete\n')
