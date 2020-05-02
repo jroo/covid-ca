@@ -20,7 +20,8 @@ def pt_report(pt_name):
 
 @app.route('/ontario/daily.json')
 def ontario_daily():
-    query = Daily.select().where(Daily.region == "Ontario")
+    query = Daily.select().where(Daily.region == "Ontario").order_by(
+        Daily.report_date)
 
     s = []
     for row in query:

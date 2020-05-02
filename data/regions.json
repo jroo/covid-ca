@@ -1,5 +1,15 @@
 [
 	{
+		"name": "Canada",
+		"nom": "Canada",
+		"abbreviation": "CA",
+		"url": "https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection.html",
+		"population": 37894799,
+		"hospital_beds": null,
+		"icu_beds": null,
+		"ventilators": null
+	},
+	{
 		"name": "Alberta",
 		"nom": "Alberta",
 		"abbreviation": "AB",

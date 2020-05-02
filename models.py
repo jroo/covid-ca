@@ -66,7 +66,7 @@ db.create_tables([PT, Daily, Cases])
 
 # populate provinces and territories
 script_path = os.path.dirname(__file__)
-relative_path = 'data/provinces_territories.json'
+relative_path = 'data/regions.json'
 with open(os.path.join(script_path, relative_path)) as f:
     data = json.load(f)
     for pt in data:
