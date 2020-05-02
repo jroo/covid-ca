@@ -6,8 +6,8 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
-    return ''
+def index():
+    return pt('Canada')
 
 
 @app.route('/<pt_name>/')
