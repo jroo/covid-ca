@@ -23,6 +23,20 @@ def average_daily_change_deaths(q):
     return (x / 7) * 100
 
 
+# given a metric, find the number of days it took to double to current value
+def double_rate(metric, pt_name, latest_row):
+    if (getattr(latest_row, metric)) > 1:
+        half_row = Daily.select().where(
+            getattr(Daily, metric) < getattr(latest_row, metric) / 2).where(
+            fn.Lower(Daily.region) == pt_name.lower()).order_by(
+            Daily.report_date.desc()).limit(1)
+        difference = latest_row.report_date - half_row[0].report_date
+        difference_days = difference.days
+    else:
+        difference_days = None
+    return difference_days
+
+
 # return zero if dividing by zero
 def weird_division(n, d):
     return n / d if d else 0
@@ -37,12 +51,15 @@ def package_up(pt_name, q, pq):
         #  info
         d['region'] = q[0].region
         d['report_date'] = q[0].report_date
+
+        # cases
         d['new_cases'] = q[0].total_cases - q[1].total_cases
         d['total_cases'] = q[0].total_cases
         d['yesterday_total'] = q[1].total_cases
         d['change_previous'] = round(weird_division(
             d['new_cases'], q[1].total_cases) * 100, 1)
         d['change_seven'] = round(average_daily_change_cases(q), 2)
+        d['case_double_rate'] = double_rate('total_cases', pt_name, q[0])
 
         # death info
         d['new_deaths'] = q[0].deaths - q[1].deaths
@@ -51,6 +68,7 @@ def package_up(pt_name, q, pq):
             weird_division(d['new_deaths'], q[1].deaths) * 100, 1)
         d['yesterday_deaths'] = q[1].deaths
         d['death_change_seven'] = round(average_daily_change_deaths(q), 2)
+        d['death_double_rate'] = double_rate('deaths', pt_name, q[0])
 
         # hospital info
         d['in_hospital'] = q[0].hospitalizations

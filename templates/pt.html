@@ -9,12 +9,12 @@
 	
 	{% if d.display_cases %}
 	<h4>Cases</h4>
-	<div>{{ d.region }} reported <strong>{{ "{:,}".format(d.new_cases) }} new confirmed cases</strong> of COVID-19, bringing {{ d.region }}'s total to {{ "{:,}".format(d.total_cases) }}. This is a <strong>{{ d.change_previous }}% increase</strong> from the previous day's total of {{ "{:,}".format(d.yesterday_total) }}. The average daily increase over the past seven days is {{ d.change_seven }}%.</div>
+	<div>{{ d.region }} reported <strong>{{ "{:,}".format(d.new_cases) }} new confirmed cases</strong> of COVID-19, bringing {{ d.region }}'s total to {{ "{:,}".format(d.total_cases) }}. This is a <strong>{{ d.change_previous }}% increase</strong> from the previous day's total of {{ "{:,}".format(d.yesterday_total) }}. The average daily increase over the past seven days is {{ d.change_seven }}%. {% if d.case_double_rate %}Cases are doubling every {{ d.case_double_rate }}  days.{% endif %}</div>
 	{% endif %}
 
 	<h4>Deaths</h4>
 	<div><strong>{{ d.new_deaths }} more deaths</strong> were reported, bringing the <strong>total to {{ "{:,}".format(d.total_deaths) }} COVID-19 deaths in {{ d.region }}</strong>. This is an <strong>increase of 
-	{{ d.death_change_previous }}%</strong> over the previous total of {{ "{:,}".format(d.yesterday_deaths) }}. The average daily increase of deaths for the past seven days is {{ d.death_change_seven }}%.</div>
+	{{ d.death_change_previous }}%</strong> over the previous total of {{ "{:,}".format(d.yesterday_deaths) }}. The average daily increase of deaths for the past seven days is {{ d.death_change_seven }}%. {% if d.death_double_rate %}Deaths are doubling every {{ d.death_double_rate }} days.{% endif %}</div>
 
 	{% if d.display_hospital %}
 	<h4>Hospital Capacity</h4>
@@ -27,13 +27,5 @@
 	{% endif %}
 	<div></div>
 
-	<h4>Sources</h4>
-	<ul>
-		<li><a href="https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection.html">Coronavirus disease (COVID-19): Outbreak update</a></li>
-		<li><a href="https://en.wikipedia.org/wiki/Population_of_Canada_by_province_and_territory">Population of Canada by province and territory</a></li>
-		<li><a href="https://www.ontario.ca/page/2019-novel-coronavirus#section-0">Status of cases in Ontario</a></li>
-		<li><a href="https://news.ontario.ca/opo/en/2020/04/ontario-significantly-expands-hospital-capacity-to-prepare-for-any-covid-19-outbreak-scenario.html">Ontario Significantly Expands Hospital Capacity to Prepare for Any COVID-19 Outbreak Scenario</a></li>
-		<li><a href="https://news.ontario.ca/opo/en/2020/04/ontario-significantly-expanding-covid-19-testing.html">Ontario Significantly Expanding COVID-19 Testing</a></li>
-		<li><a href="https://files.ontario.ca/co-covid-19-lab-testing-en-2020-04-10.pdf">Ontario's Renewed Testing Strategy</a></li>
-	</ul>
+	<div><h2></h2><a href="/sources.html">Sources</a></div>
 {% endblock %}
