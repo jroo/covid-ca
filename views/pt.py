@@ -124,3 +124,7 @@ def pt_daily_json(pt_name):
         s.append(model_to_dict(row))
 
     return jsonify(s)
+
+
+def pt_chart(pt_name):
+    return render_template("chart.html")

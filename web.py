@@ -38,6 +38,12 @@ def pt_report_json(pt_name):
     return pt_daily_json(pt_name)
 
 
+@app.route('/<pt_name>/chart')
+@cache.cached()
+def pt_report_chart(pt_name):
+    return pt_chart(pt_name)
+
+
 @app.route('/ontario/cases.json')
 @cache.cached()
 def ontario_cases():
