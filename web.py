@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from flask_caching import Cache
 from models import *
-from reports.pt import pt, pt_daily_json
+from views.pt import *
 
 import os
 
