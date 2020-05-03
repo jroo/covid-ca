@@ -9,12 +9,14 @@
 	
 	{% if d.display_cases %}
 	<h4>Cases</h4>
-	<div>{{ d.region }} reported <strong>{{ "{:,}".format(d.new_cases) }} new confirmed cases</strong> of COVID-19, bringing {{ d.region }}'s total to {{ "{:,}".format(d.total_cases) }}. This is a <strong>{{ d.change_previous }}% increase</strong> from the previous day's total of {{ "{:,}".format(d.yesterday_total) }}. The average daily increase over the past seven days is {{ d.change_seven }}%. {% if d.case_double_rate %}Cases are doubling every {{ d.case_double_rate }}  days.{% endif %}</div>
+	<div>{{ d.region }} reported <strong>{{ "{:,}".format(d.new_cases) }} new confirmed cases</strong> of COVID-19, {% if d.new_cases %}bringing the total to{% else %}keeping the total at{% endif %} {{ "{:,}".format(d.total_cases) }}. {% if d.new_cases %}This is a <strong>{{ d.change_previous }}% increase</strong> from the previous day's total of {{ "{:,}".format(d.yesterday_total) }}.{% endif %} The average daily increase over the past seven days is {{ d.change_seven }}%. {% if d.case_double_rate %}Cases are doubling every {{ d.case_double_rate }}  days.{% endif %}</div>
 	{% endif %}
 
+	{% if d.display_deaths %}
 	<h4>Deaths</h4>
-	<div><strong>{{ d.new_deaths }} more deaths</strong> were reported, bringing the <strong>total to {{ "{:,}".format(d.total_deaths) }} COVID-19 deaths in {{ d.region }}</strong>. This is an <strong>increase of 
-	{{ d.death_change_previous }}%</strong> over the previous total of {{ "{:,}".format(d.yesterday_deaths) }}. The average daily increase of deaths for the past seven days is {{ d.death_change_seven }}%. {% if d.death_double_rate %}Deaths are doubling every {{ d.death_double_rate }} days.{% endif %}</div>
+	<div><strong>{% if d.new_deaths %}{{ d.new_deaths }} more deaths</strong> were reported, bringing the <strong>total to{% else %}No new deaths were reported, keeping the total at {% endif %} {{ "{:,}".format(d.total_deaths) }}</strong>. {% if d.new_deaths %}This is an <strong>increase of 
+	{{ d.death_change_previous }}%</strong> over the previous total of {{ "{:,}".format(d.yesterday_deaths) }}. {% endif %}{% if d.total_deaths %}The average daily increase of deaths for the past seven days is {{ d.death_change_seven }}%.{% endif %} {% if d.death_double_rate%}Deaths are doubling every {{ d.death_double_rate }} days.{% endif %}</div>
+	{% endif %}
 
 	{% if d.display_hospital %}
 	<h4>Hospital Capacity</h4>
@@ -25,7 +27,6 @@
 	<h4>Testing</h4>
 	In the previous day, <strong>{{ "{:,}".format(d.daily_tests) }} tests were completed</strong>. That's <strong>{{ "{:,}".format(d.daily_tests_per_100k) }} tests per 100k people</strong> in {{ d.region }}. In total, {{ "{:,}".format(d.total_tests) }} tests have been completed.{% if d.display_testing_goals %}Ontario is aiming to test 14,000 people per day by April 29 and 16,000 people per day by May 6.{% endif %}
 	{% endif %}
-	<div></div>
 
 	<div><h2></h2><a href="/sources.html">Sources</a></div>
 {% endblock %}

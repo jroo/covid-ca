@@ -85,21 +85,14 @@ def package_up(pt_name, q, pq):
             d['daily_tests'] / (pq.population / 100000), 1)
 
         # display section flags
-        d['display_cases'] = (d['new_cases'] and
-                              d['total_cases'] and
-                              d['yesterday_total'] and
-                              d['change_previous'] and
-                              d['change_seven'])
-        d['display_deaths'] = (d['new_deaths'] and
-                               d['total_deaths'] and
-                               d['death_change_previous'] and
-                               d['yesterday_deaths'] and
-                               d['death_change_seven'])
-        d['display_hospital'] = (d['in_hospital'] and d['in_icu'])
-        d['display_testing'] = (
-            d['daily_tests'] and
-            d['total_tests'] and
-            d['daily_tests_per_100k'])
+        d['display_cases'] = (d['total_cases'] is not None and
+                              d['yesterday_total'] is not None)
+        d['display_deaths'] = (d['total_deaths'] is not None and
+                               d['yesterday_deaths'] is not None)
+        d['display_hospital'] = (d['in_hospital'] is not None and
+                                 d['in_icu'] is not None)
+        d['display_testing'] = (d['total_tests'] is not None and
+                                d['daily_tests_per_100k'] is not None)
         d['display_testing_goals'] = (pt_name == 'Ontario')
 
     return d
