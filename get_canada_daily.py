@@ -19,7 +19,8 @@ def check_data():
         for i in range(len(cr_list)):
             # process all but header row
             if (i > 0):
-                process_row(cr_list[i])
+                if cr_list[i][12] != '':
+                    process_row(cr_list[i])
 
 
 # process (clean and add) a row of data
