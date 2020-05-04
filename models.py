@@ -20,6 +20,7 @@ class PT(BaseModel):
     hospital_beds = IntegerField(null=True)
     icu_beds = IntegerField(null=True)
     ventilators = IntegerField(null=True)
+    daily_data_url = CharField(null=True)
 
 
 class Daily(BaseModel):
@@ -79,5 +80,6 @@ with open(os.path.join(script_path, relative_path)) as f:
             population=pt['population'],
             hospital_beds=pt['hospital_beds'],
             icu_beds=pt['icu_beds'],
-            ventilators=pt['ventilators']
+            ventilators=pt['ventilators'],
+            daily_data_url=pt['daily_data_url']
         ).on_conflict_ignore().execute()
