@@ -50,5 +50,5 @@ def ontario_cases():
 
 @app.route('/sources.html')
 @cache.cached()
-def sources():
-    return render_template('sources.html', d=None)
+def pt_sources():
+    return sources()

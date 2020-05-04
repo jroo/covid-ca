@@ -124,3 +124,16 @@ def pt_daily_json(pt_name):
         s.append(model_to_dict(row))
 
     return jsonify(s)
+
+
+def sources():
+    source_list = []
+    script_path = os.path.dirname(__file__)
+    relative_path = '../data/regions.json'
+    with open(os.path.join(script_path, relative_path)) as f:
+        data = json.load(f)
+        for pt in data:
+            if len(pt['sources']) > 0:
+                source_list.append(pt)
+
+    return render_template('sources.html', source_list=source_list)
