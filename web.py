@@ -29,12 +29,14 @@ def index():
 @app.route('/<pt_name>/')
 @cache.cached()
 def pt_report(pt_name):
+    pt_name = pt_name.lower().replace('-', ' ')
     return pt(pt_name)
 
 
 @app.route('/<pt_name>/daily.json')
 @cache.cached()
 def pt_report_json(pt_name):
+    pt_name = pt_name.lower().replace('-', ' ')
     return pt_daily_json(pt_name)
 
 

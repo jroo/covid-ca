@@ -103,9 +103,9 @@ def pt(pt_name):
 
     try:
         q = Daily.select().where(
-            fn.Lower(Daily.region) == pt_name.lower()).order_by(
+            fn.Lower(Daily.region) == pt_name).order_by(
             Daily.report_date.desc()).limit(8)
-        pq = PT.get(fn.Lower(PT.name) == pt_name.lower())
+        pq = PT.get(fn.Lower(PT.name) == pt_name)
     except DoesNotExist:
         abort(404)
 
@@ -116,7 +116,7 @@ def pt(pt_name):
 
 def pt_daily_json(pt_name):
     query = Daily.select().where(
-        fn.Lower(Daily.region) == pt_name.lower()).order_by(
+        fn.Lower(Daily.region) == pt_name).order_by(
         Daily.report_date)
 
     s = []
