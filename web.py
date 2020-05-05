@@ -23,7 +23,7 @@ cache = Cache(app, config={
 @app.route('/')
 @cache.cached()
 def index():
-    return pt('Canada')
+    return pt('canada')
 
 
 @app.route('/<pt_name>/')

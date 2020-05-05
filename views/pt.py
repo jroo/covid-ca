@@ -50,6 +50,7 @@ def package_up(pt_name, q, pq):
     if (q and pq):
         #  info
         d['region'] = q[0].region
+        d['region_path'] = '/%s/' % pt_name.replace(' ', '-')
         d['report_date'] = q[0].report_date
 
         # cases
