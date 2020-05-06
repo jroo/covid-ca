@@ -11,16 +11,35 @@ import time
 # check for update
 def check_data():
     print ("Checking for updates: %s" % time.ctime())
+
+    # get all regions
+    pts = PT.select().order_by(PT.name)
+
     with requests.Session() as s:
         download = s.get(os.environ['PUBLIC_HEALTH_DAILY_URL'])
         decoded = download.content.decode('utf-8')
         cr = csv.reader(decoded.splitlines(), delimiter=',')
         cr_list = list(cr)
+
+    # loop through each pt
+    for pt in pts:
+        pt_list = []
         for i in range(len(cr_list)):
-            # process all but header row
+            # create list of daily totals for just this PT
             if (i > 0):
-                if cr_list[i][12] != '':
-                    process_row(cr_list[i])
+                if (cr_list[i][1] == pt.name):
+                    pt_list.append(cr_list[i])
+
+        # loop through daily totals in list and process if PHAC approved or if
+        # totals have changed since previous day
+        for j in range(len(pt_list)):
+            if (pt_list[j][12] != ''):
+                # PHAC Approved
+                process_row(pt_list[j])
+            elif (pt_list[j][7] != pt_list[j - 1][7]):
+                if (pt_list[j][1] != 'Canada'):
+                    # Totals changed (all but Canada)
+                    process_row(pt_list[j])
 
 
 # process (clean and add) a row of data
