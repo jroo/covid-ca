@@ -16,16 +16,18 @@ Currently the application grabs, stores and exposes a JSON representation of dai
 		- ```python3 -m venv venv-covid-ca```
 		- ```source venv-covid-ca/bin/activate```
 	- Install requirements
+		- ```pip install --upgrade pip```
 		- ```pip install -r requirements.txt```
-3. Start database server
+3. Start database server and create database
 	 - ```brew services start postgres```
 	 - ```createdb covid-ca```
 4. Set up application environment
 	- ```cp example.env .env```
-	- change ```DATABASE_URL``` in .env to match your connection information
+	- change ```DATABASE_URL``` in .env to match your local connection information
 5. Seed data
 	- Pull data for the first time
-		- ```foreman run scraper.py```
+		- ```foreman run get_ontario_daily.py```
+		- ```foreman run get_canada_daily.py```
 	- Run web server
 		- ```foreman start```
-	- View `http://localhost:5000/ontario/daily.json` in browser to test. You should see a JSON representation of daily updates from Ontario
+	- View `http://localhost:5000/` in browser to test. You should the latest daily report for Canada
