@@ -1,5 +1,14 @@
 <!doctype html>
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165592149-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-165592149-1');
+  </script>
   <title>{% block title %}{% endblock %}</title>
   <meta name="viewport" content="width=device-width">
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet"> 
@@ -13,20 +22,27 @@
   {% block content %}{% endblock %}
   <div class="footer">
   	<h4>Daily reports</h4>
-  	<a href="/canada">Canada</a> -
-  	<a href="/alberta">Alberta</a> - 
-  	<a href="/british%20columbia">British Columbia</a> - 
-  	<a href="/manitoba">Manitoba</a> - 
-  	<a href="/new brunswick">New Brunswick</a> -
-  	<a href="/newfoundland and labrador">Newfoundland and Labrador</a> -
-  	<a href="/northwest territories">Northwest Territories</a> - 
-  	<a href="/nova scotia">Nova Scotia</a> - 
-  	<a href="/nunavut">Nunavut</a> - 
-  	<a href="/ontario">Ontario</a> -
-  	<a href="/prince edward island">Prince Edward Island</a> - 
-  	<a href="/quebec">Quebec</a> -
-  	<a href="/saskatchewan">Saskatchewan</a> - 
-  	<a href="/Yukon">Yukon</a>
+  	<div><a href="/canada/">Canada</a> -
+    	<a href="/alberta/">Alberta</a> - 
+    	<a href="/british-columbia/">British Columbia</a> - 
+    	<a href="/manitoba/">Manitoba</a> - 
+    	<a href="/new brunswick/">New Brunswick</a> -
+    	<a href="/newfoundland-and-labrador/">Newfoundland and Labrador</a> -
+    	<a href="/northwest-territories/">Northwest Territories</a> - 
+    	<a href="/nova-scotia/">Nova Scotia</a> - 
+    	<a href="/nunavut/">Nunavut</a> - 
+    	<a href="/ontario/">Ontario</a> -
+    	<a href="/prince-edward-island/">Prince Edward Island</a> - 
+    	<a href="/quebec/">Quebec</a> -
+    	<a href="/saskatchewan/">Saskatchewan</a> - 
+    	<a href="/yukon/">Yukon</a>
+    </div>
+    <div>
+      <h2></h2>
+      {% if d %}
+      <a href="{{ d.region_path }}daily.json">Download JSON</a> - <a href="https://github.com/jroo/covid-ca/">View on GitHub</a>
+      {% endif %}
+    </div>
   </div>
 </section>
 

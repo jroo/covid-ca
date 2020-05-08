@@ -6,23 +6,12 @@
 	<h2>Canada COVID-19 Status</h2>
 	<h4>Sources</h4>
 
-	<h5>Canada</h5>
+	{% for pt in source_list %}
+	<h5>{{ pt.name }}</h5>
 	<ul>
-		<li><a href="https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection.html">Coronavirus disease (COVID-19): Outbreak update</a></li>
-		<li><a href="https://en.wikipedia.org/wiki/Population_of_Canada_by_province_and_territory">Population of Canada by province and territory</a></li>
-		<li><a href="https://www.msn.com/en-ca/news/canada/canada-could-soon-conduct-60000-covid-19-tests-per-day-as-provinces-consider-relaxing-restrictions/ar-BB135aL2">Canada could soon conduct 60,000 COVID-19 tests per day as provinces consider relaxing restrictions</a></li>
+	{% for s in pt.sources %}
+	<li><a href="{{ s.url }}">{{ s.title }}</a></li>
+	{% endfor %}
 	</ul>
-
-	<h5>Ontario</h5>
-	<ul>
-		<li><a href="https://www.ontario.ca/page/2019-novel-coronavirus#section-0">Status of cases in Ontario</a></li>
-		<li><a href="https://news.ontario.ca/opo/en/2020/04/ontario-significantly-expands-hospital-capacity-to-prepare-for-any-covid-19-outbreak-scenario.html">Ontario Significantly Expands Hospital Capacity to Prepare for Any COVID-19 Outbreak Scenario</a></li>
-		<li><a href="https://news.ontario.ca/opo/en/2020/04/ontario-significantly-expanding-covid-19-testing.html">Ontario Significantly Expanding COVID-19 Testing</a></li>
-		<li><a href="https://files.ontario.ca/co-covid-19-lab-testing-en-2020-04-10.pdf">Ontario's Renewed Testing Strategy</a></li>
-	</ul>
-
-	<h5>Quebec</h5>
-	<ul>
-		<li><a href="https://www.msn.com/en-ca/news/canada/quebec-launches-covid-19-testing-blitz-days-before-partial-reopening/ar-BB13ubxM?li=AAggXBV">Quebec launches COVID-19 testing blitz days before partial reopening</a></li>
-	</ul>
+	{% endfor %}
 {% endblock %}

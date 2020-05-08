@@ -5,7 +5,7 @@
 {% block content %}
 	<h2>{{ d.region }} COVID-19 Status</h2>
 
-	<h3>{{ d.report_date.strftime('%B %d, %Y') }}</h3>
+	<h3>Daily update for {{ d.report_date.strftime('%B %d, %Y') }}</h3>
 	
 	{% if d.display_cases %}
 	<h4>Cases</h4>

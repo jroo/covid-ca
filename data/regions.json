@@ -7,7 +7,22 @@
 		"population": 37894799,
 		"hospital_beds": null,
 		"icu_beds": null,
-		"ventilators": null
+		"ventilators": null,
+		"sources": [
+			{
+				"title": "Coronavirus disease (COVID-19): Outbreak update",
+				"url": "https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection.html"
+			},
+			{
+				"title": "Population of Canada by province and territory",
+				"url": "https://en.wikipedia.org/wiki/Population_of_Canada_by_province_and_territory"
+			},
+			{
+				"title": "Canada could soon conduct 60,000 COVID-19 tests per day as provinces consider relaxing restrictions",
+				"url": "https://www.msn.com/en-ca/news/canada/canada-could-soon-conduct-60000-covid-19-tests-per-day-as-provinces-consider-relaxing-restrictions/ar-BB135aL2"
+			}
+		],
+		"daily_data_url": "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
 	},
 	{
 		"name": "Alberta",
@@ -17,7 +32,9 @@
 		"population": 4413146,
 		"hospital_beds": null,
 		"icu_beds": null,
-		"ventilators": null
+		"ventilators": null,
+		"sources": [],
+		"daily_data_url": null
 	},
 	{
 		"name": "British Columbia",
@@ -27,7 +44,9 @@
 		"population": 5110917,
 		"hospital_beds": null,
 		"icu_beds": null,
-		"ventilators": null
+		"ventilators": null,
+		"sources": [],
+		"daily_data_url": null
 	},
 	{
 		"name": "Manitoba",
@@ -37,7 +56,9 @@
 		"population": 1377517,
 		"hospital_beds": null,
 		"icu_beds": null,
-		"ventilators": null
+		"ventilators": null,
+		"sources": [],
+		"daily_data_url": null
 	},
 	{
 		"name": "New Brunswick",
@@ -47,7 +68,9 @@
 		"population": 779993,
 		"hospital_beds": null,
 		"icu_beds": null,
-		"ventilators": null
+		"ventilators": null,
+		"sources": [],
+		"daily_data_url": null
 	},
 	{
 		"name": "Newfoundland and Labrador",
@@ -57,7 +80,9 @@
 		"population": 521365,
 		"hospital_beds": null,
 		"icu_beds": null,
-		"ventilators": null
+		"ventilators": null,
+		"sources": [],
+		"daily_data_url": null
 	},
 	{
 		"name": "Northwest Territories",
@@ -67,7 +92,9 @@
 		"population": 44904,
 		"hospital_beds": null,
 		"icu_beds": null,
-		"ventilators": null
+		"ventilators": null,
+		"sources": [],
+		"daily_data_url": null
 	},
 	{
 		"name": "Nova Scotia",
@@ -77,7 +104,9 @@
 		"population": 977457,
 		"hospital_beds": null,
 		"icu_beds": null,
-		"ventilators": null
+		"ventilators": null,
+		"sources": [],
+		"daily_data_url": null
 	},
 	{
 		"name": "Nunavut",
@@ -87,7 +116,9 @@
 		"population": 39097,
 		"hospital_beds": null,
 		"icu_beds": null,
-		"ventilators": null
+		"ventilators": null,
+		"sources": [],
+		"daily_data_url": null
 	},
 	{
 		"name": "Ontario",
@@ -97,7 +128,26 @@
 		"population": 14711827,
 		"hospital_beds": 20354,
 		"icu_beds": 3504,
-		"ventilators": 2811
+		"ventilators": 2811,
+		"sources": [
+			{
+				"title": "Status of cases in Ontario",
+				"url": "https://www.ontario.ca/page/2019-novel-coronavirus#section-0"
+			},
+			{
+				"title": "Ontario Significantly Expands Hospital Capacity to Prepare for Any COVID-19 Outbreak Scenario",
+				"url": "https://news.ontario.ca/opo/en/2020/04/ontario-significantly-expands-hospital-capacity-to-prepare-for-any-covid-19-outbreak-scenario.html"
+			},
+			{
+				"title": "Ontario Significantly Expanding COVID-19 Testing",
+				"url": "https://news.ontario.ca/opo/en/2020/04/ontario-significantly-expanding-covid-19-testing.html"
+			},
+			{
+				"title": "Ontario's Renewed Testing Strategy",
+				"url": "https://files.ontario.ca/co-covid-19-lab-testing-en-2020-04-10.pdf"
+			}
+		],
+		"daily_data_url": "https://data.ontario.ca/dataset/f4f86e54-872d-43f8-8a86-3892fd3cb5e6/resource/ed270bb8-340b-41f9-a7c6-e8ef587e6d11/download/covidtesting.csv"
 	},
 	{
 		"name": "Prince Edward Island",
@@ -107,7 +157,9 @@
 		"population": 158158,
 		"hospital_beds": null,
 		"icu_beds": null,
-		"ventilators": null
+		"ventilators": null,
+		"sources": [],
+		"daily_data_url": null
 	},
 	{
 		"name": "Quebec",
@@ -117,7 +169,14 @@
 		"population": 8537674,
 		"hospital_beds": null,
 		"icu_beds": null,
-		"ventilators": null
+		"ventilators": null,
+		"sources": [
+			{
+				"title": "Quebec launches COVID-19 testing blitz days before partial reopening",
+				"url": "https://www.msn.com/en-ca/news/canada/quebec-launches-covid-19-testing-blitz-days-before-partial-reopening/ar-BB13ubxM?li=AAggXBV"
+			}
+		],
+		"daily_data_url": null
 	},
 	{
 		"name": "Saskatchewan",
@@ -127,7 +186,9 @@
 		"population": 1181666,
 		"hospital_beds": null,
 		"icu_beds": null,
-		"ventilators": null
+		"ventilators": null,
+		"sources": [],
+		"daily_data_url": null
 	},
 	{
 		"name": "Yukon",
@@ -137,6 +198,8 @@
 		"population": 41078,
 		"hospital_beds": null,
 		"icu_beds": null,
-		"ventilators": null
+		"ventilators": null,
+		"sources": [],
+		"daily_data_url": null
 	}
 ]

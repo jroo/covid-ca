@@ -50,6 +50,7 @@ def package_up(pt_name, q, pq):
     if (q and pq):
         #  info
         d['region'] = q[0].region
+        d['region_path'] = '/%s/' % pt_name.replace(' ', '-')
         d['report_date'] = q[0].report_date
 
         # cases
@@ -103,9 +104,9 @@ def pt(pt_name):
 
     try:
         q = Daily.select().where(
-            fn.Lower(Daily.region) == pt_name.lower()).order_by(
+            fn.Lower(Daily.region) == pt_name).order_by(
             Daily.report_date.desc()).limit(8)
-        pq = PT.get(fn.Lower(PT.name) == pt_name.lower())
+        pq = PT.get(fn.Lower(PT.name) == pt_name)
     except DoesNotExist:
         abort(404)
 
@@ -116,7 +117,7 @@ def pt(pt_name):
 
 def pt_daily_json(pt_name):
     query = Daily.select().where(
-        fn.Lower(Daily.region) == pt_name.lower()).order_by(
+        fn.Lower(Daily.region) == pt_name).order_by(
         Daily.report_date)
 
     s = []
@@ -128,3 +129,16 @@ def pt_daily_json(pt_name):
 
 def pt_chart(pt_name):
     return render_template("chart.html")
+
+
+def sources():
+    source_list = []
+    script_path = os.path.dirname(__file__)
+    relative_path = '../data/regions.json'
+    with open(os.path.join(script_path, relative_path)) as f:
+        data = json.load(f)
+        for pt in data:
+            if len(pt['sources']) > 0:
+                source_list.append(pt)
+
+    return render_template('sources.html', source_list=source_list)
