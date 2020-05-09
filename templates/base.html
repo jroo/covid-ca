@@ -13,13 +13,9 @@
   <title>{% block title %}{% endblock %}</title>
   <meta name="viewport" content="width=device-width">
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet"> 
-  <style>
-    .content {
-      font-family: 'Merriweather', serif;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="/static/styles.css">
 </head>
-<section class="content">
+<section id="main-content" class="content">
   {% block content %}{% endblock %}
   <div class="footer">
   	<h4>Daily reports</h4>
@@ -27,7 +23,7 @@
     	<a href="/alberta/">Alberta</a> - 
     	<a href="/british-columbia/">British Columbia</a> - 
     	<a href="/manitoba/">Manitoba</a> - 
-    	<a href="/new brunswick/">New Brunswick</a> -
+    	<a href="/new-brunswick/">New Brunswick</a> -
     	<a href="/newfoundland-and-labrador/">Newfoundland and Labrador</a> -
     	<a href="/northwest-territories/">Northwest Territories</a> - 
     	<a href="/nova-scotia/">Nova Scotia</a> - 

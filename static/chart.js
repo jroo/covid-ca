@@ -1,16 +1,18 @@
-const gw = 400
+const gw = Math.min(800, window.innerWidth)
 const gh = 200
 const marginBottom = 10
 const marginDefault = 40
+const barColor = 'lightcoral'
 
 // select svg container first
-
 function drawGraph(div, dataField) {
 
 	const svg = d3.select('#canvas-' + div)
 		.append('svg')
-		.attr('height', gh)
-		.attr('width', gw);
+	   .classed("canvas", true)
+	   .attr("width", gw)
+	   .attr("height", gh);
+
 
 	const margin = {'top': marginDefault, 'right': marginDefault, 'bottom': marginBottom, 'left': marginDefault};
 	const graphWidth = gw - margin.left - margin.right;
@@ -42,7 +44,7 @@ function drawGraph(div, dataField) {
 			.data(data)
 			.attr('width', x.bandwidth)
 			.attr('height', d => graphHeight - y(_.get(d, dataField)))
-			.attr('fill', '#00ccff')
+			.attr('fill', barColor)
 			.attr('x', d => x(d.report_date))
 			.attr('y', d => y(_.get(d, dataField)));
 
@@ -52,7 +54,7 @@ function drawGraph(div, dataField) {
 			.append('rect')
 				.attr('width', x.bandwidth)
 				.attr('height', d => graphHeight - y(_.get(d, dataField)))
-				.attr('fill', '#00ccff')
+				.attr('fill', barColor)
 				.attr('x', d => x(d.report_date))
 				.attr('y', d => y(_.get(d, dataField)));
 
@@ -71,9 +73,15 @@ function drawGraph(div, dataField) {
 }
 
 
-drawGraph('cases', 'total_cases');
-drawGraph('deaths', 'deaths');
-drawGraph('hospital', 'hospitalizations');
-drawGraph('testing', 'total_tests');
+window.onload = function() {
+
+	drawGraph('cases', 'total_cases');
+	drawGraph('deaths', 'deaths');
+	drawGraph('hospital', 'hospitalizations');
+	drawGraph('testing', 'total_tests');
+
+}
+
+
 
 
