@@ -2,6 +2,12 @@
   max-width: 1000px;
   margin-left: 3px;
   font-family: 'Merriweather', serif;
+  color: #222222;
+}
+
+strong {
+  color: black;
+  font-weight: bolder;
 }
 
 .canvas {
