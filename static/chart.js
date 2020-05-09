@@ -1,17 +1,22 @@
-const gw = Math.min(800, window.innerWidth)
+const gw = Math.min(900, window.innerWidth)
 const gh = 200
 const marginBottom = 10
 const marginDefault = 40
 const barColor = 'lightcoral'
 
 // select svg container first
-function drawGraph(div, dataField) {
+function drawGraph(div, dataField, title) {
 
 	const svg = d3.select('#canvas-' + div)
 		.append('svg')
 	   .classed("canvas", true)
 	   .attr("width", gw)
 	   .attr("height", gh);
+
+	const t = svg.append("text")
+        .text(title)
+        .attr('y', 25)
+        .attr('font-size', '10px');
 
 
 	const margin = {'top': marginDefault, 'right': marginDefault, 'bottom': marginBottom, 'left': marginDefault};
@@ -22,6 +27,7 @@ function drawGraph(div, dataField) {
 		.attr('width', graphWidth)
 		.attr('height', graphHeight)
 		.attr('transform', `translate(${margin.left}, ${margin.top})`);
+
 
 	const xAxisGroup = graph.append('g')
 		.attr('transform', `translate(0, ${graphHeight})`)
@@ -60,7 +66,8 @@ function drawGraph(div, dataField) {
 
 		// create axis
 		const xAxis = d3.axisBottom(x)
-			.tickFormat('');
+			.tickFormat('')
+
 		const yAxis = d3.axisLeft(y)
 			.ticks(5)
 		xAxisGroup.call(xAxis);
@@ -75,10 +82,10 @@ function drawGraph(div, dataField) {
 
 window.onload = function() {
 
-	drawGraph('cases', 'total_cases');
-	drawGraph('deaths', 'deaths');
-	drawGraph('hospital', 'hospitalizations');
-	drawGraph('testing', 'total_tests');
+	drawGraph('cases', 'cases_past_day', 'Daily Cases');
+	drawGraph('deaths', 'deaths_past_day', 'Daily Deaths');
+	drawGraph('hospital', 'hospitalizations', 'Hospitalizations');
+	drawGraph('testing', 'tests_past_day', 'Daily Tests');
 
 }
 
