@@ -81,12 +81,10 @@ function drawGraph(div, dataField, title) {
 
 
 window.onload = function() {
-
 	drawGraph('cases', 'cases_past_day', 'Daily New Cases');
 	drawGraph('deaths', 'deaths_past_day', 'Daily New Deaths');
 	drawGraph('hospital', 'hospitalizations', 'Hospitalizations');
 	drawGraph('testing', 'tests_past_day', 'Daily Tests');
-
 }
 
 

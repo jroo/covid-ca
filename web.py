@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, redirect, render_template
 from flask_caching import Cache
 from models import *
 from views.pt import *
@@ -23,7 +23,7 @@ cache = Cache(app, config={
 @app.route('/')
 @cache.cached()
 def index():
-    return pt('canada')
+    return redirect('/canada/')
 
 
 @app.route('/<pt_name>/')
