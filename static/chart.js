@@ -16,7 +16,7 @@ function drawGraph(div, dataField, title) {
 	const t = svg.append("text")
         .text(title)
         .attr('y', 25)
-        .attr('font-size', '10px');
+        .attr('font-size', '12px');
 
 
 	const margin = {'top': marginDefault, 'right': marginDefault, 'bottom': marginBottom, 'left': marginDefault};
