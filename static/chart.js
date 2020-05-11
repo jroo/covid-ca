@@ -15,9 +15,8 @@ function drawGraph(div, dataField, title) {
 
 	const t = svg.append("text")
         .text(title)
-        .attr('y', 25)
-        .attr('font-size', '12px');
-
+        .attr("class", "chart-title")
+        .attr('y', 25);
 
 	const margin = {'top': marginDefault, 'right': marginDefault, 'bottom': marginBottom, 'left': marginDefault};
 	const graphWidth = gw - margin.left - margin.right;

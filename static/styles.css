@@ -6,10 +6,44 @@
 }
 
 strong {
-  color: black;
   font-weight: bolder;
 }
 
 .canvas {
   max-width: 900px;
 }
+
+.chart-title {
+	font-size: 12px;
+	fill: #222222;
+}
+
+@media (prefers-color-scheme: dark) {
+	body {
+	  background-color: #333333;
+	}
+
+	.content {
+		color: #eeeeee;
+	}
+
+	strong {
+		color: white;
+	}
+
+	.chart-title {
+		fill: #eeeeee;
+	}
+	a {
+		color: lightblue;
+	}
+	a:visited {
+		color: lightgrey;
+	}
+	a:hover {
+		color: white;
+	}
+}
+
+
+
