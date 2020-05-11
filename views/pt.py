@@ -116,13 +116,22 @@ def pt(pt_name):
 
 
 def pt_daily_json(pt_name):
-    query = Daily.select().where(
-        fn.Lower(Daily.region) == pt_name).order_by(
-        Daily.report_date)
+    try:
+        q = Daily.select().where(
+            fn.Lower(Daily.region) == pt_name).order_by(
+            Daily.report_date)
+        pq = PT.get(fn.Lower(PT.name) == pt_name)
+    except:
+        abort(404)
 
     s = []
-    for row in query:
-        s.append(model_to_dict(row))
+    for row in q:
+        d_row = model_to_dict(row)
+
+        # add tests_past_day_per_100k
+        d_row['tests_past_day_per_100k'] = round(
+            row.tests_past_day / (pq.population / 100000), 1) if row.tests_past_day else None   
+        s.append(d_row)
 
     return jsonify(s)
 
