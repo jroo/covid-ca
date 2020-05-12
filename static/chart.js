@@ -1,6 +1,6 @@
 const gw = Math.min(900, window.innerWidth)
 const gh = 200
-const marginBottom = 10
+const marginBottom = 30
 const marginDefault = 40
 const barColor = 'lightcoral'
 
@@ -34,45 +34,56 @@ function drawGraph(div, dataField, title) {
 
 	d3.json('daily.json').then( data => {
 
+		console.log(data.map(item => new Date(item.report_date)))
+
 		const y = d3.scaleLinear()
 			.domain([0, d3.max(data, d => _.get(d, dataField))])
 			.range([graphHeight, 0]);
 
-		const x = d3.scaleBand()
+		const x = d3.scaleTime()
+			.domain(d3.extent(data.map(item => new Date(item.report_date))))
+			.range([0, graphWidth])
+
+
+		const xband = d3.scaleBand()
 			.domain(data.map(item => item.report_date))
 			.range([0, graphWidth])
 			.paddingInner(0.1)
 			.paddingOuter(0.2);
 
+
 		// join data to rects
 		const rects = graph.selectAll('rect')
 			.data(data)
-			.attr('width', x.bandwidth)
+			.attr('width', xband.bandwidth)
 			.attr('height', d => graphHeight - y(_.get(d, dataField)))
 			.attr('fill', barColor)
-			.attr('x', d => x(d.report_date))
+			.attr('x', d => xband(d.report_date))
 			.attr('y', d => y(_.get(d, dataField)));
 
 
 		// append enter selection to the dom
 		rects.enter()
 			.append('rect')
-				.attr('width', x.bandwidth)
+				.attr('width', xband.bandwidth)
 				.attr('height', d => graphHeight - y(_.get(d, dataField)))
 				.attr('fill', barColor)
-				.attr('x', d => x(d.report_date))
+				.attr('x', d => xband(d.report_date))
 				.attr('y', d => y(_.get(d, dataField)));
 
 		// create axis
 		const xAxis = d3.axisBottom(x)
-			.tickFormat('')
+			.ticks(d3.timeMonth, 1)
+			.tickFormat(d3.timeFormat('%b %d'));
 
 		const yAxis = d3.axisLeft(y)
 			.ticks(5)
+
 		xAxisGroup.call(xAxis);
 		yAxisGroup.call(yAxis);
+
 		xAxisGroup.selectAll('text')
-			.attr('transform', 'rotate(-48)')
+			// .attr('transform', 'rotate(-60)')
 			.attr('text-anchor', 'end')
 			.attr('fill', 'grey');
 	})

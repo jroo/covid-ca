@@ -8,6 +8,12 @@ import requests
 import time
 
 
+# create range of dates between start date and seven days before end date
+def daterange(start_date, end_date):
+    for n in range(int ((end_date - start_date).days) - 6):
+        yield start_date + datetime.timedelta(n)
+
+
 # check for update
 def check_data():
     print ("Checking for updates: %s" % time.ctime())
@@ -21,6 +27,7 @@ def check_data():
         cr = csv.reader(decoded.splitlines(), delimiter=',')
         cr_list = list(cr)
 
+    print ("Process daily totals and create records for empty dates")
     # loop through each pt
     for pt in pts:
         pt_list = []
@@ -40,6 +47,15 @@ def check_data():
                 if (pt_list[j][1] != 'Canada'):
                     # Totals changed (all but Canada)
                     process_row(pt_list[j])
+
+        # loop through each date between 1/31 and a week ago
+        # and add an empty record if a record for that date doesn't exist
+        start_date = datetime.date(2020, 1, 26)
+        end_date = datetime.date.today()
+        for single_date in daterange(start_date, end_date):
+            Daily.get_or_create(
+                report_date = single_date,
+                region = pt)
 
 
 # process (clean and add) a row of data

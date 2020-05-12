@@ -118,8 +118,9 @@ def pt(pt_name):
 def pt_daily_json(pt_name):
     try:
         q = Daily.select().where(
-            fn.Lower(Daily.region) == pt_name).order_by(
-            Daily.report_date)
+            fn.Lower(Daily.region) == pt_name).where(
+            Daily.report_date > '2020-02-28').order_by(
+            Daily.report_date);
         pq = PT.get(fn.Lower(PT.name) == pt_name)
     except:
         abort(404)

@@ -1,12 +1,27 @@
+from datetime import date
 from flask import Flask, redirect, render_template
+from flask.json import JSONEncoder
 from flask_caching import Cache
 from models import *
 from views.pt import *
 
 import os
 
+class CustomJSONEncoder(JSONEncoder):
+    def default(self, obj):
+        try:
+            if isinstance(obj, date):
+                return obj.isoformat()
+            iterable = iter(obj)
+        except TypeError:
+            pass
+        else:
+            return list(iterable)
+        return JSONEncoder.default(self, obj)
+
 
 app = Flask(__name__)
+app.json_encoder = CustomJSONEncoder
 
 CACHE_TYPE = 'null'
 if (os.environ['FLASK_ENV'] == 'production'):
