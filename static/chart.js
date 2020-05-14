@@ -34,8 +34,6 @@ function drawGraph(div, dataField, title) {
 
 	d3.json('daily.json').then( data => {
 
-		console.log(data.map(item => new Date(item.report_date)))
-
 		const y = d3.scaleLinear()
 			.domain([0, d3.max(data, d => _.get(d, dataField))])
 			.range([graphHeight, 0]);
@@ -43,7 +41,6 @@ function drawGraph(div, dataField, title) {
 		const x = d3.scaleTime()
 			.domain(d3.extent(data.map(item => new Date(item.report_date))))
 			.range([0, graphWidth])
-
 
 		const xband = d3.scaleBand()
 			.domain(data.map(item => item.report_date))
@@ -70,6 +67,16 @@ function drawGraph(div, dataField, title) {
 				.attr('fill', barColor)
 				.attr('x', d => xband(d.report_date))
 				.attr('y', d => y(_.get(d, dataField)));
+
+		// add lines
+	     graph.append('path')
+		      .datum(data)
+		      .attr('class', 'rolling-average')
+		      .attr("d", d3.line()
+		        .x(d => xband(d.report_date) + (xband.bandwidth() / 2))
+		        .y(d => y(_.get(d, dataField + '_rolling_average')))
+		        )
+
 
 		// create axis
 		const xAxis = d3.axisBottom(x)

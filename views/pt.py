@@ -23,6 +23,20 @@ def average_daily_change_deaths(q):
     return (x / 7) * 100
 
 
+def rolling_average(q, i, field):
+    # calculate 7 day rolling average for field
+    x = 0
+    rolling_total = 0
+    rolling_average = None
+    if i > 5:
+        for j in range(0, 7):
+            if (getattr(q[i-j], field)):
+                rolling_total += getattr(q[i-j], field)
+
+        rolling_average = weird_division(rolling_total, 7)
+    return rolling_average
+
+
 # given a metric, find the number of days it took to double to current value
 def double_rate(metric, pt_name, latest_row):
     if (getattr(latest_row, metric)) > 1:
@@ -126,12 +140,17 @@ def pt_daily_json(pt_name):
         abort(404)
 
     s = []
-    for row in q:
+    for i, row in enumerate(q):
         d_row = model_to_dict(row)
 
         # add tests_past_day_per_100k
         d_row['tests_past_day_per_100k'] = round(
             row.tests_past_day / (pq.population / 100000), 1) if row.tests_past_day else None   
+        d_row['cases_past_day_rolling_average'] = rolling_average(q, i, 'cases_past_day')
+        d_row['deaths_past_day_rolling_average'] = rolling_average(q, i, 'deaths_past_day')
+        tests_past_day_rolling_average = rolling_average(q, i, 'tests_past_day')
+        d_row['tests_past_day_per_100k_rolling_average'] = round(
+                tests_past_day_rolling_average / (pq.population / 100000), 1) if tests_past_day_rolling_average else None
         s.append(d_row)
 
     return jsonify(s)
