@@ -29,9 +29,9 @@
 	{% if d.display_testing %}
 	<h4>Testing</h4>
 	In the previous day, <strong>{{ "{:,}".format(d.daily_tests) }} tests were completed</strong>. That's <strong>{{ "{:,}".format(d.daily_tests_per_100k) }} tests per 100k people</strong> in {{ d.region }}. In total, {{ "{:,}".format(d.total_tests) }} tests have been completed.
-	{% if d.region == "Ontario" %}Ontario is aiming to test 14,000 people per day by April 29 and 16,000 people per day by May 6.{% endif %}
+	{% if d.region == "Ontario" %}Ontario aimed to test 14,000 people per day by April 29 and 16,000 people per day by May 6.{% endif %}
 
-	{% if d.region == "Canada" %}Canada is aiming to test 60,000 people per day.{% endif %}
+	{% if d.region == "Canada" %}Canada is aiming to test 60,000 people per day as soon as possible.{% endif %}
 
 	{% if d.region == "Quebec" %}Quebec is aiming to test 14,000 people per day as soon as possible and utlimately 30,000 people per day.{% endif %}
 	<div class="svg-container" id="canvas-testing"></div>
