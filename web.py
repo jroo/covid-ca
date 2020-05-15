@@ -70,6 +70,9 @@ def ontario_cases():
         s.append(model_to_dict(row))
     return jsonify(s)
 
+@app.route('/sources.html/')
+def source_redir():
+    return redirect('/sources/', code=301)
 
 @app.route('/sources/')
 @cache.cached()
