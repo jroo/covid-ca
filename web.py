@@ -71,7 +71,12 @@ def ontario_cases():
     return jsonify(s)
 
 
-@app.route('/sources.html')
+@app.route('/sources/')
 @cache.cached()
 def pt_sources():
     return sources()
+
+@app.route('/about/')
+@cache.cached()
+def about():
+    return render_template("about.html")
